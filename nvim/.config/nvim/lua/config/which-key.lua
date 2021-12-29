@@ -69,38 +69,6 @@ local mappings = {
         e = { "<Cmd>NvimTreeToggle<CR>", "Explorer" },
     },
 
-    -- Git
-    -- g = {
-    --   name = "Source code",
-    --   s = { "<Cmd>Git<Cr>", "Git status" },
-    --   p = { "<Cmd>Git push<Cr>", "Git push" },
-    --   b = { "<Cmd>Git branch<Cr>", "Git branch" },
-    --   d = { "<Cmd>Gvdiffsplit<Cr>", "Git diff" },
-    --   f = { "<Cmd>Git fetch --all<Cr>", "Git fetch" },
-    --   n = { "<Cmd>Neogit<Cr>", "NeoGit" },
-    --   v = { "<Cmd>DiffviewOpen<Cr>", "Diffview open" },
-    --   c = { "<Cmd>DiffviewClose<Cr>", "Diffview close" },
-    --   h = { "<Cmd>DiffviewFileHistory<Cr>", "File history" },
-    --   ["r"] = {
-    --     name = "Rebase",
-    --     u = {
-    --       "<Cmd>Git rebase upstream/master<Cr>",
-    --       "Git rebase upstream/master",
-    --     },
-    --     o = {
-    --       "<Cmd>Git rebase origin/master<Cr>",
-    --       "Git rebase origin/master",
-    --     },
-    --   },
-    --   x = {
-    --     name = "Diff",
-    --     ["2"] = { "<Cmd>diffget //2", "Diffget 2" },
-    --     ["3"] = { "<Cmd>diffget //3", "Diffget 3" },
-    --   },
-    --   g = { name = "Generate doc" },
-    --   y = { name = "Git URL" },
-    -- },
-
     -- Project
     p = {
         name = "Project",
@@ -115,20 +83,7 @@ local mappings = {
     },
 
     -- Easymotion
-    -- ["<Space>"] = { name = "Easymotion" },
-
-    -- Search
-    -- ["s"] = {
-    --   name = "Search",
-    --   w = {
-    --     "<Cmd>lua require('telescope').extensions.arecibo.websearch()<CR>",
-    --     "Web search",
-    --   },
-    --   s = { "<Cmd>lua require('spectre').open()<CR>", "Search file" },
-    --   z = { "<Plug>SearchNormal", "Browser search" },
-    --   c = { "q:", "Command history" },
-    --   g = { "q/", "Grep history" },
-    -- },
+    ["<Space>"] = { name = "Easymotion" },
 
     -- Testing
     t = {
@@ -154,42 +109,35 @@ local mappings = {
         b = "Blame line",
         p = "Preview hunk",
         R = "Reset buffer",
-        r = "Reset buffer",
         s = "Stage hunk",
         S = "Stage buffer",
         u = "Undo stage hunk",
         U = "Reset buffer index",
     },
 
-    -- Notes
-    -- n = {
-    --   name = "Notes",
-    --   n = {
-    --     "<Cmd>FloatermNew nvim ~/workspace/dev/notes/<Cr>",
-    --     "New note",
-    --   },
-    --   o = { "<Cmd>GkeepOpen<Cr>", "GKeep Open" },
-    --   c = { "<Cmd>GkeepClose<Cr>", "GKeep Close" },
-    --   r = { "<Cmd>GkeepRefresh<Cr>", "GKeep Refresh" },
-    --   s = { "<Cmd>GkeepSync<Cr>", "GKeep Sync" },
-    --   p = { "<Cmd>MarkdownPreview<Cr>", "Preview markdown" },
-    --   z = { "<Cmd>ZenMode<Cr>", "Zen Mode" },
-    --   g = { "<Cmd>GrammarousCheck<Cr>", "Grammar check" },
-    -- },
-
-    -- Magma
-    -- m = {
-    --   name = "Magma",
-    --   l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
-    --   r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
-    --   d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
-    --   o = { "<Cmd>MagmaShowOutput<Cr>", "Show output" },
-    --   i = { "<Cmd>MagmaInit<Cr>", "Init" },
-    --   u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
-    -- },
-
-    -- K = {name = "Cheatsheet"},
-    -- C = {name = "Cheatsheet (toggle comment)"},
+    -- Git
+    g = {
+        name = "Source code",
+        s = { "<Cmd>Git<Cr>", "Git status" },
+        p = { "<Cmd>Git push<Cr>", "Git push" },
+        b = { "<Cmd>Git branch<Cr>", "Git branch" },
+        x = { "<Cmd>Gvdiffsplit<Cr>", "Git diff" },
+        f = { "<Cmd>Git fetch --all<Cr>", "Git fetch" },
+        v = { "<Cmd>DiffviewOpen<Cr>", "Diffview open" },
+        c = { "<Cmd>DiffviewClose<Cr>", "Diffview close" },
+        -- h = { "<Cmd>DiffviewFileHistory<Cr>", "File history" },
+        ["r"] = {
+            name = "Rebase",
+            u = {
+                "<Cmd>Git rebase upstream/master<Cr>",
+                "Git rebase upstream/master",
+            },
+            o = {
+                "<Cmd>Git rebase origin/master<Cr>",
+                "Git rebase origin/master",
+            },
+        },
+    },
 }
 
 local vmappings = {
@@ -217,7 +165,6 @@ local lsp_mappings = {
         t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
     },
     r = {
-        -- n = { "<Cmd>Lspsaga rename<CR>", "Rename" },
         n = { "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
     },
 }

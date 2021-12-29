@@ -146,7 +146,16 @@ function M.setup()
         --     end
         -- }
         -- use {"unblevable/quick-scope", event = "VimEnter"}
+        use { "easymotion/vim-easymotion" }
 
+        -- use {
+        --     'phaazon/hop.nvim',
+        --     branch = 'v1', -- optional but strongly recommended
+        --     config = function()
+        --         -- you can configure Hop the way you like here; see :h hop-config
+        --         require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+        --     end
+        -- }
         -- Folder tree (seems to similar to telescope filebroswer)
         use {
             "kyazdani42/nvim-tree.lua",

@@ -106,14 +106,6 @@ function M.setup()
                 require("gitsigns").setup()
             end,
         }
-        -- use {
-        --     "TimUntersberger/neogit",
-        --     cmd = "Neogit",
-        --     requires = "nvim-lua/plenary.nvim",
-        --     config = function()
-        --         require("config.neogit").setup()
-        --     end,
-        -- }
         use {
             "sindrets/diffview.nvim",
             cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },

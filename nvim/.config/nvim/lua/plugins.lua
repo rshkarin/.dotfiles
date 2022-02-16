@@ -64,7 +64,7 @@ function M.setup()
             },
         }
 
-        -- -- Symbols sidemenu
+        -- Symbols sidemenu
         use {
             "simrat39/symbols-outline.nvim",
             event = "VimEnter",
@@ -83,7 +83,7 @@ function M.setup()
         -- Caching compiled lua modules
         use { "lewis6991/impatient.nvim" }
 
-        -- -- Cmd (wild) menu suggestions
+        -- Cmd (wild) menu suggestions
         -- use {
         --     "gelguy/wilder.nvim",
         --     run = ":UpdateRemotePlugins",
@@ -95,7 +95,7 @@ function M.setup()
         -- Undotree
         use { "mbbill/undotree" }
 
-        -- -- Git
+        -- Git
         use { "tpope/vim-rhubarb", event = "VimEnter" }
         use { "tpope/vim-fugitive" }
         use { "junegunn/gv.vim" }
@@ -121,16 +121,16 @@ function M.setup()
             end,
         }
 
-        -- -- Movements
-        -- use {
-        --     "phaazon/hop.nvim",
-        --     as = "hop",
-        --     config = function()
-        --         -- you can configure Hop the way you like here; see :h hop-config
-        --         require("hop").setup({keys = "etovxqpdygfblzhckisuran"})
-        --     end
-        -- }
-        use { "easymotion/vim-easymotion" }
+        -- Movements
+        use {
+            "phaazon/hop.nvim",
+            as = "hop",
+            config = function()
+                -- you can configure Hop the way you like here; see :h hop-config
+                require("hop").setup({keys = "etovxqpdygfblzhckisuran"})
+            end
+        }
+        -- use { "easymotion/vim-easymotion" }
 
         -- Fast left-right movement
         -- use {"unblevable/quick-scope", event = "VimEnter"}
@@ -145,7 +145,7 @@ function M.setup()
         }
 
         -- Colorscheme
-        -- -- use { "sainnhe/gruvbox-material" }
+        -- use { "sainnhe/gruvbox-material" }
         use { "gruvbox-community/gruvbox" }
         use {
             "kyazdani42/nvim-web-devicons",
@@ -237,7 +237,7 @@ function M.setup()
         -- Identation guide to all lines
         use { "lukas-reineke/indent-blankline.nvim" }
 
-        -- -- Notifications
+        -- Notifications
         -- use {
         --     "rcarriga/nvim-notify",
         --     event = "VimEnter",
@@ -254,7 +254,7 @@ function M.setup()
             end,
         }
 
-        -- -- Markdown
+        -- Markdown
         -- use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = "markdown", cmd = {"MarkdownPreview"}}
         -- use {"plasticboy/vim-markdown", ft = "markdown", requires = {"godlygeek/tabular"}, event = "VimEnter"}
 
@@ -339,10 +339,10 @@ function M.setup()
             end,
         }
 
-        -- -- Cheatsheet
+        -- Cheatsheet
         -- use {"sudormrfbin/cheatsheet.nvim"}
 
-        -- -- Metrics
+        -- Metrics
         use { "dstein64/vim-startuptime", cmd = "StartupTime", config = [[vim.g.startuptime_tries = 10]] }
 
         -- Copilot

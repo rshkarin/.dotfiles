@@ -1,2 +1,2 @@
 require "config.colorscheme"
-require "comfig.efm"
+require "config.efm"

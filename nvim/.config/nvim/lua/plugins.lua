@@ -81,13 +81,6 @@ function M.setup()
         use { "tpope/vim-commentary" }
 
         -- Caching compiled lua modules
-        -- b = { "<Cmd>Telescope buffers<Cr>", "Search buffers" },
-        -- f = { "<Cmd>Telescope git_files<Cr>", "Git files" }, -- or DashboardFindFile
-        -- g = { "<Cmd>Telescope live_grep<Cr>", "Live grep" },
-        -- s = { "<Cmd>Telescope current_buffer_fuzzy_find<Cr>", "Current buffer grep" },
-        -- h = { "<Cmd>Telescope help_tags<Cr>", "Help" },
-        -- v = { "<Cmd>Telescope file_browser<Cr>", "Pop-up file browser" },
-        -- r = { "<Cmd>Telescope frecency<Cr>", "Recent file" },
         use { "lewis6991/impatient.nvim" }
 
         -- -- Cmd (wild) menu suggestions
@@ -145,17 +138,11 @@ function M.setup()
         --         require("hop").setup({keys = "etovxqpdygfblzhckisuran"})
         --     end
         -- }
-        -- use {"unblevable/quick-scope", event = "VimEnter"}
         use { "easymotion/vim-easymotion" }
 
-        -- use {
-        --     'phaazon/hop.nvim',
-        --     branch = 'v1', -- optional but strongly recommended
-        --     config = function()
-        --         -- you can configure Hop the way you like here; see :h hop-config
-        --         require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-        --     end
-        -- }
+        -- Fast left-right movement
+        -- use {"unblevable/quick-scope", event = "VimEnter"}
+
         -- Folder tree (seems to similar to telescope filebroswer)
         use {
             "kyazdani42/nvim-tree.lua",
@@ -224,15 +211,19 @@ function M.setup()
                 require("todo-comments").setup {}
             end,
         }
+
+        -- Peek to a specific line
         use {
             "nacro90/numb.nvim",
             config = function()
                 require("numb").setup()
             end,
         }
+
+        -- Easy text alignment
         -- use {"junegunn/vim-easy-align"}
 
-        -- Development workflow
+        -- Documentation generator
         use {
             "kkoomen/vim-doge",
             run = ":call doge#install()",
@@ -241,6 +232,8 @@ function M.setup()
             end,
             event = "VimEnter",
         }
+
+        -- Snippet runner
         use {
             "michaelb/sniprun",
             run = "bash ./install.sh",
@@ -248,6 +241,8 @@ function M.setup()
                 require("config.sniprun").setup()
             end,
         }
+
+        -- Identation guide to all lines
         use { "lukas-reineke/indent-blankline.nvim" }
 
         -- -- Notifications
@@ -258,6 +253,8 @@ function M.setup()
         --         vim.notify = require("notify")
         --     end
         -- }
+
+        -- Keys mapping
         use {
             "folke/which-key.nvim",
             config = function()
@@ -274,15 +271,8 @@ function M.setup()
 
         -- Go
         use { "fatih/vim-go", run = ":GoUpdateBinaries" }
-        -- -- Note taking
-        -- use {
-        --     "vhyrro/neorg",
-        --     event = "VimEnter",
-        --     config = function()
-        --         require("config.neorg").setup()
-        --     end
-        -- }
-        -- use {"stevearc/gkeep.nvim", event = "VimEnter", run = ":UpdateRemotePlugins"}
+
+        -- Zen mode
         use {
             "folke/zen-mode.nvim",
             cmd = "ZenMode",

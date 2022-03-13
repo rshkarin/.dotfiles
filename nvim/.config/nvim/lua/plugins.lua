@@ -350,24 +350,26 @@ function M.setup()
         -- Code completion
         use {
             "hrsh7th/nvim-cmp",
-            event = "BufRead",
             config = function()
                 require("config.cmp").setup()
             end,
             requires = {
-                { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+                { "hrsh7th/cmp-buffer" },
                 { "hrsh7th/cmp-nvim-lsp" },
-                { "quangnguyen30192/cmp-nvim-ultisnips", after = "nvim-cmp" },
-                { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-                { "octaltree/cmp-look", after = "nvim-cmp" },
-                { "hrsh7th/cmp-path", after = "nvim-cmp" },
-                { "hrsh7th/cmp-calc", after = "nvim-cmp" },
-                { "f3fora/cmp-spell", after = "nvim-cmp" },
-                { "hrsh7th/cmp-emoji", after = "nvim-cmp" },
-                { "ray-x/cmp-treesitter", after = "nvim-cmp" },
+                { "quangnguyen30192/cmp-nvim-ultisnips" },
+                { "hrsh7th/cmp-nvim-lua" },
+                { "octaltree/cmp-look" },
+                { "hrsh7th/cmp-path" },
+                { "hrsh7th/cmp-calc" },
+                { "f3fora/cmp-spell" },
+                { "hrsh7th/cmp-emoji" },
+                { "ray-x/cmp-treesitter" },
+                { "hrsh7th/vim-vsnip" },
+                { "hrsh7th/cmp-cmdline" },
+                { "hrsh7th/cmp-nvim-lsp-document-symbol" },
             },
         }
-        -- use { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp", after = "nvim-cmp" }
+        use { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" }
 
         -- Dashboard
         use { "mhinz/vim-startify" }

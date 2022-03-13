@@ -60,7 +60,7 @@ local mappings = {
         g = { "<Cmd>lua require('telescope.builtin').live_grep()<Cr>", "Live grep" },
         s = { "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<Cr>", "Current buffer grep" },
         h = { "<Cmd>lua require('telescope.builtin').help_tags()<Cr>", "Help" },
-        v = { "<Cmd>lua require('telescope.builtin').file_browser()<Cr>", "Pop-up file browser" },
+        v = { "<Cmd>lua require('telescope').extensions.file_browser.file_browser()<Cr>", "Pop-up file browser" },
         r = { "<Cmd>lua require('telescope').extensions.frecency.frecency()<Cr>", "Recent file" },
         x = { "<Cmd>DashboardFindHistory<Cr>", "History" },
         m = { "<Cmd>DashboardJumpMark<Cr>", "Mark" },
@@ -77,7 +77,7 @@ local mappings = {
             "Search files",
         },
         p = {
-            "<Cmd>lua require('telescope').extensions.project.project({change_dir = true})<Cr>",
+            "<Cmd>lua require('telescope').extensions.project.project({change_dir= true})<Cr>",
             "List projects",
         },
     },

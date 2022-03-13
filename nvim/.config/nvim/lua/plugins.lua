@@ -31,15 +31,28 @@ function M.setup()
                 { "nvim-telescope/telescope-project.nvim", after = "telescope.nvim" },
                 { "nvim-telescope/telescope-media-files.nvim", after = "telescope.nvim" },
                 { "nvim-telescope/telescope-symbols.nvim", after = "telescope.nvim" },
+                { "nvim-telescope/telescope-file-browser.nvim", after = "telescope.nvim" },
             },
             wants = {
                 "popup.nvim",
                 "plenary.nvim",
                 "telescope-frecency.nvim",
                 "telescope-fzf-native.nvim",
+                "telescope-file-browser.nvim",
             },
             config = function()
                 require("config.telescope").setup()
+            end,
+        }
+
+        use {
+            "AckslD/nvim-neoclip.lua",
+            requires = {
+                { "tami5/sqlite.lua", module = "sqlite" },
+                { "nvim-telescope/telescope.nvim" },
+            },
+            config = function()
+                require("neoclip").setup()
             end,
         }
 
@@ -61,6 +74,7 @@ function M.setup()
                         require("nvim-autopairs").setup {}
                     end,
                 },
+                { "nvim-treesitter/nvim-treesitter-textobjects" },
             },
         }
 

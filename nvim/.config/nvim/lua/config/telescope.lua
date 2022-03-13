@@ -10,7 +10,6 @@ function M.setup()
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
         extensions = {
-            arecibo = { ["selected_engine"] = "google", ["show_http_headers"] = false, ["show_domain_icons"] = false },
             fzf = {
                 fuzzy = true,
                 override_generic_sorter = false,
@@ -32,18 +31,26 @@ function M.setup()
     }
 
     require("telescope").load_extension "fzf"
+    require("telescope").load_extension "neoclip"
     -- require("telescope").load_extension "dap"
     -- require("telescope").load_extension "project"
     -- require("telescope").load_extension "media_files"
     require("telescope").load_extension "frecency"
+    require("telescope").load_extension "file_browser"
     -- require("telescope").load_extension("gkeep")
 
     M.search_dotfiles = function()
-        require("telescope.builtin").file_browser { cwd = "$HOME/.config/nvim/", prompt_title = "< VimRC >" }
+        require("telescope").extensions.file_browser.file_browser {
+            prompt_title = "< VimRC >",
+            cwd = "$HOME/.config/nvim/",
+        }
     end
 
     M.switch_projects = function()
-        require("telescope.builtin").file_browser { prompt_title = "< Switch Project >", cwd = "$HOME/Work/" }
+        require("telescope").extensions.file_browser.file_browser {
+            prompt_title = "< Switch Project >",
+            cwd = "$HOME/Work/",
+        }
     end
 end
 

@@ -292,11 +292,14 @@ function M.setup()
         }
 
         -- Markdown
-        -- use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = "markdown", cmd = {"MarkdownPreview"}}
-        -- use {"plasticboy/vim-markdown", ft = "markdown", requires = {"godlygeek/tabular"}, event = "VimEnter"}
+        use {
+            "iamcco/markdown-preview.nvim",
+            run = "cd app && yarn install",
+            ft = "markdown",
+        }
 
         -- Lua
-        use { "folke/lua-dev.nvim", event = "VimEnter" }
+        use { "folke/lua-dev.nvim" }
 
         -- Go
         use { "fatih/vim-go", run = ":GoUpdateBinaries" }
@@ -319,6 +322,14 @@ function M.setup()
         --     end,
         --     after = "nvim-cmp",
         -- }
+        -- Dim inactive portions of the code
+        use {
+            "folke/twilight.nvim",
+            event = "VimEnter",
+            config = function()
+                require("twilight").setup {}
+            end,
+        }
 
         -- Snippets
         use {

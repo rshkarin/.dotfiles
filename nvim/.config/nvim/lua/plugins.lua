@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     local packer = require "packer"
 
-    local conf = { compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua" }
+    local conf = { compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua", max_jobs = 50 }
 
     local function plugins(use)
         -- Packer can manage itself as an optional plugin
@@ -97,15 +97,6 @@ function M.setup()
         -- Caching compiled lua modules
         use { "lewis6991/impatient.nvim" }
 
-        -- Cmd (wild) menu suggestions
-        -- use {
-        --     "gelguy/wilder.nvim",
-        --     run = ":UpdateRemotePlugins",
-        --     config = function()
-        --         require("config.wilder").setup()
-        --     end
-        -- }
-
         -- Escape insert mode with double j
         use {
             "max397574/better-escape.nvim",
@@ -162,7 +153,6 @@ function M.setup()
                 require("config.harpoon").setup()
             end,
         }
-        -- use { "easymotion/vim-easymotion" }
 
         -- Fast left-right movement
         use { "unblevable/quick-scope", event = "VimEnter" }
@@ -216,18 +206,6 @@ function M.setup()
         use { "folke/lsp-colors.nvim" }
         use { "sbdchd/neoformat" }
         use { "ray-x/lsp_signature.nvim" }
-        -- -- use {"szw/vim-maximizer"}
-        -- use {"kevinhwang91/nvim-bqf"}
-        -- use {"andymass/vim-matchup", event = "CursorMoved"}
-        -- use {
-        --     "folke/trouble.nvim",
-        --     requires = "kyazdani42/nvim-web-devicons",
-        --     event = "VimEnter",
-        --     cmd = {"TroubleToggle", "Trouble"},
-        --     config = function()
-        --         require("trouble").setup({auto_open = false})
-        --     end
-        -- }
         use {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
@@ -254,9 +232,6 @@ function M.setup()
             end,
         }
 
-        -- Easy text alignment
-        -- use {"junegunn/vim-easy-align"}
-
         -- Documentation generator
         use {
             "kkoomen/vim-doge",
@@ -278,15 +253,6 @@ function M.setup()
 
         -- Identation guide to all lines
         use { "lukas-reineke/indent-blankline.nvim" }
-
-        -- Notifications
-        -- use {
-        --     "rcarriga/nvim-notify",
-        --     event = "VimEnter",
-        --     config = function()
-        --         vim.notify = require("notify")
-        --     end
-        -- }
 
         -- Keys mapping
         use {
@@ -318,15 +284,6 @@ function M.setup()
             end,
         }
 
-        -- use {
-        --     "windwp/nvim-autopairs",
-        --     event = "BufRead",
-        --     run = "make",
-        --     config = function()
-        --         require("nvim-autopairs").setup {}
-        --     end,
-        --     after = "nvim-cmp",
-        -- }
         -- Dim inactive portions of the code
         use {
             "folke/twilight.nvim",
@@ -378,12 +335,6 @@ function M.setup()
 
         -- Dashboard
         use { "mhinz/vim-startify" }
-        -- -- use {
-        -- --     "glepnir/dashboard-nvim",
-        -- --     config = function()
-        -- --         require("config.dashboard").setup()
-        -- --     end
-        -- -- }
 
         -- Status line
         use {
@@ -393,9 +344,6 @@ function M.setup()
                 require("config.lualine").setup()
             end,
         }
-
-        -- Cheatsheet
-        -- use {"sudormrfbin/cheatsheet.nvim"}
         use {
             "SmiteshP/nvim-gps",
             module = "nvim-gps",

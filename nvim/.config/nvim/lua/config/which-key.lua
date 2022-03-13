@@ -126,17 +126,6 @@ local mappings = {
         f = { "<Cmd>Git fetch --all<Cr>", "Git fetch" },
         v = { "<Cmd>DiffviewOpen<Cr>", "Diffview open" },
         c = { "<Cmd>DiffviewClose<Cr>", "Diffview close" },
-        ["r"] = {
-            name = "Rebase",
-            u = {
-                "<Cmd>Git rebase upstream/master<Cr>",
-                "Git rebase upstream/master",
-            },
-            o = {
-                "<Cmd>Git rebase origin/master<Cr>",
-                "Git rebase origin/master",
-            },
-        },
     },
 }
 

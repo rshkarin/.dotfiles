@@ -169,6 +169,35 @@ local lsp_mappings = {
     },
 }
 
+
+local harpoon_mappings = {
+    ["<C-a>"] = {
+        "<Cmd>lua require('harpoon.mark').add_file()<Cr>",
+        "Add file to harpoon",
+    },
+    ["<C-e>"] = {
+        "<Cmd>lua require('harpoon.ui').toggle_quick_menu()<Cr>",
+        "Harpoon quick menu",
+    },
+    ["<C-a>"] = {
+        "<Cmd>lua require('harpoon.ui').nav_prev()<Cr>",
+        "Harpoon previous file",
+    },
+    ["<C-s>"] = {
+        "<Cmd>lua require('harpoon.ui').nav_next()<Cr>",
+        "Harpoon next file",
+    },
+}
+
+local harpoon_opts = {
+    mode = "n",
+    prefix = "",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+
 local lsp_mappings_opts = {
     {
         "document_formatting",
@@ -230,6 +259,7 @@ function M.setup()
     wk.setup {}
     wk.register(mappings, opts)
     wk.register(vmappings, vopts)
+    wk.register(harpoon_mappings, harpoon_opts)
 end
 
 return M

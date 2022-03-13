@@ -143,6 +143,17 @@ function M.setup()
                 -- you can configure Hop the way you like here; see :h hop-config
                 require("hop").setup({keys = "etovxqpdygfblzhckisuran"})
             end
+
+        -- Filemarks
+        use {
+            "ThePrimeagen/harpoon",
+            module = "harpoon",
+            requires = {
+                { "nvim-telescope/telescope.nvim" },
+            },
+            config = function()
+                require("config.harpoon").setup()
+            end,
         }
         -- use { "easymotion/vim-easymotion" }
 

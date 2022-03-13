@@ -165,7 +165,7 @@ function M.setup()
         -- use { "easymotion/vim-easymotion" }
 
         -- Fast left-right movement
-        -- use {"unblevable/quick-scope", event = "VimEnter"}
+        use { "unblevable/quick-scope", event = "VimEnter" }
 
         -- Folder tree (seems to similar to telescope filebroswer)
         use {

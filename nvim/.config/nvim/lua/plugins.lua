@@ -170,7 +170,8 @@ function M.setup()
         }
 
         -- Colorscheme
-        -- use { "sainnhe/gruvbox-material" }
+        use { "luisiacc/gruvbox-baby" }
+        use { "folke/tokyonight.nvim" }
         use { "gruvbox-community/gruvbox" }
         use {
             "kyazdani42/nvim-web-devicons",

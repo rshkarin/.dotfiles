@@ -228,12 +228,16 @@ function M.setup()
         --     end
         -- }
         use {
-            "folke/todo-comments.nvim",
-            requires = "nvim-lua/plenary.nvim",
-            cmd = { "TodoTrouble", "TodoTelescope" },
-            event = "BufReadPost",
+            "folke/trouble.nvim",
+            requires = "kyazdani42/nvim-web-devicons",
+            event = "VimEnter",
+            cmd = { "TroubleToggle", "Trouble" },
             config = function()
-                require("todo-comments").setup {}
+                require("trouble").setup {
+                    mode = "document_diagnostics",
+                }
+            end,
+        }
             end,
         }
 

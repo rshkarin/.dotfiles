@@ -169,6 +169,28 @@ local lsp_mappings = {
     },
 }
 
+local hop_mappings = {
+    f = {
+        name = "Hop",
+        f = {
+            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+            "Line hop",
+        },
+        t = {
+            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>",
+            "Global hop",
+        },
+    },
+}
+
+local hop_opts = {
+    mode = "n",
+    prefix = "",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
 
 local harpoon_mappings = {
     ["<C-a>"] = {
@@ -259,6 +281,7 @@ function M.setup()
     wk.setup {}
     wk.register(mappings, opts)
     wk.register(vmappings, vopts)
+    wk.register(hop_mappings, hop_opts)
     wk.register(harpoon_mappings, harpoon_opts)
 end
 

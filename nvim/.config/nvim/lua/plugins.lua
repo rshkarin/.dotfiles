@@ -341,6 +341,13 @@ function M.setup()
 
         -- Cheatsheet
         -- use {"sudormrfbin/cheatsheet.nvim"}
+        use {
+            "SmiteshP/nvim-gps",
+            module = "nvim-gps",
+            config = function()
+                require("nvim-gps").setup()
+            end,
+        }
 
         -- Metrics
         use { "dstein64/vim-startuptime", cmd = "StartupTime", config = [[vim.g.startuptime_tries = 10]] }

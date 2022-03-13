@@ -106,6 +106,13 @@ function M.setup()
         --     end
         -- }
 
+        -- Escape insert mode with double j
+        use {
+            "max397574/better-escape.nvim",
+            config = function()
+                require("better_escape").setup()
+            end,
+        }
         -- Undotree
         use { "mbbill/undotree" }
 

@@ -213,6 +213,7 @@ function M.setup()
                 require("lspkind").init()
             end,
         }
+        use { "folke/lsp-colors.nvim" }
         use { "sbdchd/neoformat" }
         use { "ray-x/lsp_signature.nvim" }
         -- -- use {"szw/vim-maximizer"}
@@ -238,6 +239,10 @@ function M.setup()
                 }
             end,
         }
+        use {
+            "j-hui/fidget.nvim",
+            config = function()
+                require("fidget").setup {}
             end,
         }
 

@@ -60,7 +60,7 @@ local mappings = {
         g = { "<Cmd>lua require('telescope.builtin').live_grep()<Cr>", "Live grep" },
         s = { "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<Cr>", "Current buffer grep" },
         h = { "<Cmd>lua require('telescope.builtin').help_tags()<Cr>", "Help" },
-        v = { "<Cmd>lua require('telescope.builtin').file_browser()<Cr>", "Pop-up file browser" },
+        v = { "<Cmd>lua require('telescope').extensions.file_browser.file_browser()<Cr>", "Pop-up file browser" },
         r = { "<Cmd>lua require('telescope').extensions.frecency.frecency()<Cr>", "Recent file" },
         x = { "<Cmd>DashboardFindHistory<Cr>", "History" },
         m = { "<Cmd>DashboardJumpMark<Cr>", "Mark" },
@@ -68,38 +68,6 @@ local mappings = {
         a = { "<Cmd>xa<Cr>", "Save all & quit" },
         e = { "<Cmd>NvimTreeToggle<CR>", "Explorer" },
     },
-
-    -- Git
-    -- g = {
-    --   name = "Source code",
-    --   s = { "<Cmd>Git<Cr>", "Git status" },
-    --   p = { "<Cmd>Git push<Cr>", "Git push" },
-    --   b = { "<Cmd>Git branch<Cr>", "Git branch" },
-    --   d = { "<Cmd>Gvdiffsplit<Cr>", "Git diff" },
-    --   f = { "<Cmd>Git fetch --all<Cr>", "Git fetch" },
-    --   n = { "<Cmd>Neogit<Cr>", "NeoGit" },
-    --   v = { "<Cmd>DiffviewOpen<Cr>", "Diffview open" },
-    --   c = { "<Cmd>DiffviewClose<Cr>", "Diffview close" },
-    --   h = { "<Cmd>DiffviewFileHistory<Cr>", "File history" },
-    --   ["r"] = {
-    --     name = "Rebase",
-    --     u = {
-    --       "<Cmd>Git rebase upstream/master<Cr>",
-    --       "Git rebase upstream/master",
-    --     },
-    --     o = {
-    --       "<Cmd>Git rebase origin/master<Cr>",
-    --       "Git rebase origin/master",
-    --     },
-    --   },
-    --   x = {
-    --     name = "Diff",
-    --     ["2"] = { "<Cmd>diffget //2", "Diffget 2" },
-    --     ["3"] = { "<Cmd>diffget //3", "Diffget 3" },
-    --   },
-    --   g = { name = "Generate doc" },
-    --   y = { name = "Git URL" },
-    -- },
 
     -- Project
     p = {
@@ -109,26 +77,13 @@ local mappings = {
             "Search files",
         },
         p = {
-            "<Cmd>lua require('telescope').extensions.project.project({change_dir = true})<Cr>",
+            "<Cmd>lua require('telescope').extensions.project.project({change_dir= true})<Cr>",
             "List projects",
         },
     },
 
     -- Easymotion
-    -- ["<Space>"] = { name = "Easymotion" },
-
-    -- Search
-    -- ["s"] = {
-    --   name = "Search",
-    --   w = {
-    --     "<Cmd>lua require('telescope').extensions.arecibo.websearch()<CR>",
-    --     "Web search",
-    --   },
-    --   s = { "<Cmd>lua require('spectre').open()<CR>", "Search file" },
-    --   z = { "<Plug>SearchNormal", "Browser search" },
-    --   c = { "q:", "Command history" },
-    --   g = { "q/", "Grep history" },
-    -- },
+    ["<Space>"] = { name = "Easymotion" },
 
     -- Testing
     t = {
@@ -154,42 +109,24 @@ local mappings = {
         b = "Blame line",
         p = "Preview hunk",
         R = "Reset buffer",
-        r = "Reset buffer",
         s = "Stage hunk",
         S = "Stage buffer",
         u = "Undo stage hunk",
         U = "Reset buffer index",
     },
 
-    -- Notes
-    -- n = {
-    --   name = "Notes",
-    --   n = {
-    --     "<Cmd>FloatermNew nvim ~/workspace/dev/notes/<Cr>",
-    --     "New note",
-    --   },
-    --   o = { "<Cmd>GkeepOpen<Cr>", "GKeep Open" },
-    --   c = { "<Cmd>GkeepClose<Cr>", "GKeep Close" },
-    --   r = { "<Cmd>GkeepRefresh<Cr>", "GKeep Refresh" },
-    --   s = { "<Cmd>GkeepSync<Cr>", "GKeep Sync" },
-    --   p = { "<Cmd>MarkdownPreview<Cr>", "Preview markdown" },
-    --   z = { "<Cmd>ZenMode<Cr>", "Zen Mode" },
-    --   g = { "<Cmd>GrammarousCheck<Cr>", "Grammar check" },
-    -- },
-
-    -- Magma
-    -- m = {
-    --   name = "Magma",
-    --   l = { "<Cmd>MagmaEvaluateLine<Cr>", "Evaluate line" },
-    --   r = { "<Cmd>MagmaReevaluateCell<Cr>", "Reevaluate Cell" },
-    --   d = { "<Cmd>MagmaDelete<Cr>", "Delete" },
-    --   o = { "<Cmd>MagmaShowOutput<Cr>", "Show output" },
-    --   i = { "<Cmd>MagmaInit<Cr>", "Init" },
-    --   u = { "<Cmd>MagmaDeinit<Cr>", "Deinit" },
-    -- },
-
-    -- K = {name = "Cheatsheet"},
-    -- C = {name = "Cheatsheet (toggle comment)"},
+    -- Git
+    g = {
+        name = "Source code",
+        s = { "<Cmd>Git<Cr>", "Git status" },
+        p = { "<Cmd>Git push<Cr>", "Git push" },
+        b = { "<Cmd>Git branch<Cr>", "Git branch" },
+        e = { "<Cmd>Git commit<Cr>", "Git commit" },
+        x = { "<Cmd>Gvdiffsplit<Cr>", "Git diff" },
+        f = { "<Cmd>Git fetch --all<Cr>", "Git fetch" },
+        v = { "<Cmd>DiffviewOpen<Cr>", "Diffview open" },
+        c = { "<Cmd>DiffviewClose<Cr>", "Diffview close" },
+    },
 }
 
 local vmappings = {
@@ -217,9 +154,59 @@ local lsp_mappings = {
         t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
     },
     r = {
-        -- n = { "<Cmd>Lspsaga rename<CR>", "Rename" },
         n = { "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
     },
+}
+
+local hop_mappings = {
+    f = {
+        name = "Hop",
+        f = {
+            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+            "Line hop",
+        },
+        t = {
+            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>",
+            "Global hop",
+        },
+    },
+}
+
+local hop_opts = {
+    mode = "n",
+    prefix = "",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+
+local harpoon_mappings = {
+    ["<C-a>"] = {
+        "<Cmd>lua require('harpoon.mark').add_file()<Cr>",
+        "Add file to harpoon",
+    },
+    ["<C-e>"] = {
+        "<Cmd>lua require('harpoon.ui').toggle_quick_menu()<Cr>",
+        "Harpoon quick menu",
+    },
+    ["<C-a>"] = {
+        "<Cmd>lua require('harpoon.ui').nav_prev()<Cr>",
+        "Harpoon previous file",
+    },
+    ["<C-s>"] = {
+        "<Cmd>lua require('harpoon.ui').nav_next()<Cr>",
+        "Harpoon next file",
+    },
+}
+
+local harpoon_opts = {
+    mode = "n",
+    prefix = "",
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
 }
 
 local lsp_mappings_opts = {
@@ -283,6 +270,8 @@ function M.setup()
     wk.setup {}
     wk.register(mappings, opts)
     wk.register(vmappings, vopts)
+    wk.register(hop_mappings, hop_opts)
+    wk.register(harpoon_mappings, harpoon_opts)
 end
 
 return M

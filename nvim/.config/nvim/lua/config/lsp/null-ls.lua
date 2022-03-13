@@ -9,7 +9,7 @@ function M.setup()
     local sources = {
         nls.builtins.formatting.prettierd,
         nls.builtins.formatting.eslint_d,
-        nls.builtins.diagnostics.shellcheck,
+        -- nls.builtins.diagnostics.shellcheck,
         -- nls.builtins.diagnostics.markdownlint,
         -- nls.builtins.code_actions.gitsigns,
         nls.builtins.formatting.prettier,
@@ -17,9 +17,15 @@ function M.setup()
         nls.builtins.formatting.black,
         nls.builtins.diagnostics.flake8,
     }
-    nls.config { sources = sources }
 
-    lsputils.setup_server("null-ls", CONFIG)
+    nls.setup {
+        sources = sources,
+        on_attach = lsputils.lsp_attach,
+        on_exit = lsputils.lsp_exit,
+        on_init = lsputils.lsp_init,
+        capabilities = lsputils.get_capabilities(),
+        flags = { debounce_text_changes = 150 },
+    }
 end
 
 return M

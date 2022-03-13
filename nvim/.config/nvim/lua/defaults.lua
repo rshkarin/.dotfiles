@@ -34,6 +34,7 @@ function M.setup()
         set scrolloff=8
         set signcolumn=yes
         set encoding=UTF-8
+        set termguicolors
         " set colorcolumn=80
 
         " Ignore files

@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     local packer = require "packer"
 
-    local conf = { compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua" }
+    local conf = { compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua", max_jobs = 50 }
 
     local function plugins(use)
         -- Packer can manage itself as an optional plugin
@@ -31,15 +31,28 @@ function M.setup()
                 { "nvim-telescope/telescope-project.nvim", after = "telescope.nvim" },
                 { "nvim-telescope/telescope-media-files.nvim", after = "telescope.nvim" },
                 { "nvim-telescope/telescope-symbols.nvim", after = "telescope.nvim" },
+                { "nvim-telescope/telescope-file-browser.nvim", after = "telescope.nvim" },
             },
             wants = {
                 "popup.nvim",
                 "plenary.nvim",
                 "telescope-frecency.nvim",
                 "telescope-fzf-native.nvim",
+                "telescope-file-browser.nvim",
             },
             config = function()
                 require("config.telescope").setup()
+            end,
+        }
+
+        use {
+            "AckslD/nvim-neoclip.lua",
+            requires = {
+                { "tami5/sqlite.lua", module = "sqlite" },
+                { "nvim-telescope/telescope.nvim" },
+            },
+            config = function()
+                require("neoclip").setup()
             end,
         }
 
@@ -61,10 +74,11 @@ function M.setup()
                         require("nvim-autopairs").setup {}
                     end,
                 },
+                { "nvim-treesitter/nvim-treesitter-textobjects" },
             },
         }
 
-        -- -- Symbols sidemenu
+        -- Symbols sidemenu
         use {
             "simrat39/symbols-outline.nvim",
             event = "VimEnter",
@@ -81,28 +95,19 @@ function M.setup()
         use { "tpope/vim-commentary" }
 
         -- Caching compiled lua modules
-        -- b = { "<Cmd>Telescope buffers<Cr>", "Search buffers" },
-        -- f = { "<Cmd>Telescope git_files<Cr>", "Git files" }, -- or DashboardFindFile
-        -- g = { "<Cmd>Telescope live_grep<Cr>", "Live grep" },
-        -- s = { "<Cmd>Telescope current_buffer_fuzzy_find<Cr>", "Current buffer grep" },
-        -- h = { "<Cmd>Telescope help_tags<Cr>", "Help" },
-        -- v = { "<Cmd>Telescope file_browser<Cr>", "Pop-up file browser" },
-        -- r = { "<Cmd>Telescope frecency<Cr>", "Recent file" },
         use { "lewis6991/impatient.nvim" }
 
-        -- -- Cmd (wild) menu suggestions
-        -- use {
-        --     "gelguy/wilder.nvim",
-        --     run = ":UpdateRemotePlugins",
-        --     config = function()
-        --         require("config.wilder").setup()
-        --     end
-        -- }
-
+        -- Escape insert mode with double j
+        use {
+            "max397574/better-escape.nvim",
+            config = function()
+                require("better_escape").setup()
+            end,
+        }
         -- Undotree
         use { "mbbill/undotree" }
 
-        -- -- Git
+        -- Git
         use { "tpope/vim-rhubarb", event = "VimEnter" }
         use { "tpope/vim-fugitive" }
         use { "junegunn/gv.vim" }
@@ -113,14 +118,6 @@ function M.setup()
                 require("gitsigns").setup()
             end,
         }
-        -- use {
-        --     "TimUntersberger/neogit",
-        --     cmd = "Neogit",
-        --     requires = "nvim-lua/plenary.nvim",
-        --     config = function()
-        --         require("config.neogit").setup()
-        --     end,
-        -- }
         use {
             "sindrets/diffview.nvim",
             cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
@@ -136,16 +133,29 @@ function M.setup()
             end,
         }
 
-        -- -- Movements
-        -- use {
-        --     "phaazon/hop.nvim",
-        --     as = "hop",
-        --     config = function()
-        --         -- you can configure Hop the way you like here; see :h hop-config
-        --         require("hop").setup({keys = "etovxqpdygfblzhckisuran"})
-        --     end
-        -- }
-        -- use {"unblevable/quick-scope", event = "VimEnter"}
+        -- Movements
+        use {
+            "phaazon/hop.nvim",
+            as = "hop",
+            config = function()
+                require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
+            end,
+        }
+
+        -- Filemarks
+        use {
+            "ThePrimeagen/harpoon",
+            module = "harpoon",
+            requires = {
+                { "nvim-telescope/telescope.nvim" },
+            },
+            config = function()
+                require("config.harpoon").setup()
+            end,
+        }
+
+        -- Fast left-right movement
+        use { "unblevable/quick-scope", event = "VimEnter" }
 
         -- Folder tree (seems to similar to telescope filebroswer)
         use {
@@ -157,7 +167,8 @@ function M.setup()
         }
 
         -- Colorscheme
-        -- -- use { "sainnhe/gruvbox-material" }
+        use { "luisiacc/gruvbox-baby" }
+        use { "folke/tokyonight.nvim" }
         use { "gruvbox-community/gruvbox" }
         use {
             "kyazdani42/nvim-web-devicons",
@@ -192,38 +203,36 @@ function M.setup()
                 require("lspkind").init()
             end,
         }
+        use { "folke/lsp-colors.nvim" }
         use { "sbdchd/neoformat" }
         use { "ray-x/lsp_signature.nvim" }
-        -- -- use {"szw/vim-maximizer"}
-        -- use {"kevinhwang91/nvim-bqf"}
-        -- use {"andymass/vim-matchup", event = "CursorMoved"}
-        -- use {
-        --     "folke/trouble.nvim",
-        --     requires = "kyazdani42/nvim-web-devicons",
-        --     event = "VimEnter",
-        --     cmd = {"TroubleToggle", "Trouble"},
-        --     config = function()
-        --         require("trouble").setup({auto_open = false})
-        --     end
-        -- }
         use {
-            "folke/todo-comments.nvim",
-            requires = "nvim-lua/plenary.nvim",
-            cmd = { "TodoTrouble", "TodoTelescope" },
-            event = "BufReadPost",
+            "folke/trouble.nvim",
+            requires = "kyazdani42/nvim-web-devicons",
+            event = "VimEnter",
+            cmd = { "TroubleToggle", "Trouble" },
             config = function()
-                require("todo-comments").setup {}
+                require("trouble").setup {
+                    mode = "document_diagnostics",
+                }
             end,
         }
+        use {
+            "j-hui/fidget.nvim",
+            config = function()
+                require("fidget").setup {}
+            end,
+        }
+
+        -- Peek to a specific line
         use {
             "nacro90/numb.nvim",
             config = function()
                 require("numb").setup()
             end,
         }
-        -- use {"junegunn/vim-easy-align"}
 
-        -- Development workflow
+        -- Documentation generator
         use {
             "kkoomen/vim-doge",
             run = ":call doge#install()",
@@ -232,6 +241,8 @@ function M.setup()
             end,
             event = "VimEnter",
         }
+
+        -- Snippet runner
         use {
             "michaelb/sniprun",
             run = "bash ./install.sh",
@@ -239,16 +250,11 @@ function M.setup()
                 require("config.sniprun").setup()
             end,
         }
+
+        -- Identation guide to all lines
         use { "lukas-reineke/indent-blankline.nvim" }
 
-        -- -- Notifications
-        -- use {
-        --     "rcarriga/nvim-notify",
-        --     event = "VimEnter",
-        --     config = function()
-        --         vim.notify = require("notify")
-        --     end
-        -- }
+        -- Keys mapping
         use {
             "folke/which-key.nvim",
             config = function()
@@ -256,24 +262,20 @@ function M.setup()
             end,
         }
 
-        -- -- Markdown
-        -- use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = "markdown", cmd = {"MarkdownPreview"}}
-        -- use {"plasticboy/vim-markdown", ft = "markdown", requires = {"godlygeek/tabular"}, event = "VimEnter"}
+        -- Markdown
+        use {
+            "iamcco/markdown-preview.nvim",
+            run = "cd app && yarn install",
+            ft = "markdown",
+        }
 
         -- Lua
-        use { "folke/lua-dev.nvim", event = "VimEnter" }
+        use { "folke/lua-dev.nvim" }
 
         -- Go
         use { "fatih/vim-go", run = ":GoUpdateBinaries" }
-        -- -- Note taking
-        -- use {
-        --     "vhyrro/neorg",
-        --     event = "VimEnter",
-        --     config = function()
-        --         require("config.neorg").setup()
-        --     end
-        -- }
-        -- use {"stevearc/gkeep.nvim", event = "VimEnter", run = ":UpdateRemotePlugins"}
+
+        -- Zen mode
         use {
             "folke/zen-mode.nvim",
             cmd = "ZenMode",
@@ -282,15 +284,14 @@ function M.setup()
             end,
         }
 
-        -- use {
-        --     "windwp/nvim-autopairs",
-        --     event = "BufRead",
-        --     run = "make",
-        --     config = function()
-        --         require("nvim-autopairs").setup {}
-        --     end,
-        --     after = "nvim-cmp",
-        -- }
+        -- Dim inactive portions of the code
+        use {
+            "folke/twilight.nvim",
+            event = "VimEnter",
+            config = function()
+                require("twilight").setup {}
+            end,
+        }
 
         -- Snippets
         use {
@@ -311,33 +312,29 @@ function M.setup()
         -- Code completion
         use {
             "hrsh7th/nvim-cmp",
-            event = "BufRead",
             config = function()
                 require("config.cmp").setup()
             end,
             requires = {
-                { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+                { "hrsh7th/cmp-buffer" },
                 { "hrsh7th/cmp-nvim-lsp" },
-                { "quangnguyen30192/cmp-nvim-ultisnips", after = "nvim-cmp" },
-                { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-                { "octaltree/cmp-look", after = "nvim-cmp" },
-                { "hrsh7th/cmp-path", after = "nvim-cmp" },
-                { "hrsh7th/cmp-calc", after = "nvim-cmp" },
-                { "f3fora/cmp-spell", after = "nvim-cmp" },
-                { "hrsh7th/cmp-emoji", after = "nvim-cmp" },
-                { "ray-x/cmp-treesitter", after = "nvim-cmp" },
+                { "quangnguyen30192/cmp-nvim-ultisnips" },
+                { "hrsh7th/cmp-nvim-lua" },
+                { "octaltree/cmp-look" },
+                { "hrsh7th/cmp-path" },
+                { "hrsh7th/cmp-calc" },
+                { "f3fora/cmp-spell" },
+                { "hrsh7th/cmp-emoji" },
+                { "ray-x/cmp-treesitter" },
+                { "hrsh7th/vim-vsnip" },
+                { "hrsh7th/cmp-cmdline" },
+                { "hrsh7th/cmp-nvim-lsp-document-symbol" },
             },
         }
-        -- use { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp", after = "nvim-cmp" }
+        use { "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" }
 
         -- Dashboard
         use { "mhinz/vim-startify" }
-        -- -- use {
-        -- --     "glepnir/dashboard-nvim",
-        -- --     config = function()
-        -- --         require("config.dashboard").setup()
-        -- --     end
-        -- -- }
 
         -- Status line
         use {
@@ -347,11 +344,15 @@ function M.setup()
                 require("config.lualine").setup()
             end,
         }
+        use {
+            "SmiteshP/nvim-gps",
+            module = "nvim-gps",
+            config = function()
+                require("nvim-gps").setup()
+            end,
+        }
 
-        -- -- Cheatsheet
-        -- use {"sudormrfbin/cheatsheet.nvim"}
-
-        -- -- Metrics
+        -- Metrics
         use { "dstein64/vim-startuptime", cmd = "StartupTime", config = [[vim.g.startuptime_tries = 10]] }
 
         -- Copilot

@@ -162,11 +162,11 @@ local hop_mappings = {
     f = {
         name = "Hop",
         f = {
-            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+            "<Cmd>HopWordCurrentLine<cr>",
             "Line hop",
         },
         t = {
-            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>",
+            "<Cmd>HopWord<cr>",
             "Global hop",
         },
     },

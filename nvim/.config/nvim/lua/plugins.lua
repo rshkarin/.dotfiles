@@ -213,7 +213,7 @@ function M.setup()
             cmd = { "TroubleToggle", "Trouble" },
             config = function()
                 require("trouble").setup {
-                    mode = "document_diagnostics",
+                    mode = "workspace_diagnostics",
                 }
             end,
         }

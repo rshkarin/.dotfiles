@@ -151,7 +151,7 @@ local lsp_mappings = {
         D = { "<Cmd>lua vim.lsp.buf.type_definition()<CR>", "Type definitions" },
         a = { "<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR>", "Code actions" },
         n = { "<Cmd>update<CR>:Neoformat<CR>", "Neoformat" },
-        t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
+        t = { "<Cmd>TroubleToggle workspace_diagnostics<CR>", "Trouble" },
     },
     r = {
         n = { "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },

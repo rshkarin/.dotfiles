@@ -364,37 +364,3 @@ function M.setup()
 end
 
 return M
-
---[[
-
-
-    " Indent vertical lines
-    Plug
-
-    " Move over doc via automatically created mark
-    Plug 'phaazon/hop.nvim'
-
-    " Zen mode
-    Plug 'folke/zen-mode.nvim'
-
-    " Icons
-    Plug 'kyazdani42/nvim-web-devicons'
-
-    " Folder tree (seems to similar to telescope filebroswer)
-    Plug 'kyazdani42/nvim-tree.lua'
-
-    " Debug adapter protocol
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'nvim-telescope/telescope-dap.nvim'
-
-    " Debug individual test
-    Plug 'leoluz/nvim-dap-go'
-
-    " Quickfix list with issues
-    Plug 'folke/trouble.nvim'
-
-    " Pictograms on completion window
-    Plug 'onsails/lspkind-nvim'
-
-    " Add support more flexible selection within pair characters
-    Plug 'wellle/targets.vim' ]]

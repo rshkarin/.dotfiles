@@ -1,5 +1,26 @@
 local M = {}
 
+local packer_bootstrap = false
+
+local function packer_init()
+    local fn = vim.fn
+    local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+    if fn.empty(fn.glob(install_path)) > 0 then
+        packer_bootstrap = fn.system {
+            "git",
+            "clone",
+            "--depth",
+            "1",
+            "https://github.com/wbthomason/packer.nvim",
+            install_path,
+        }
+        vim.cmd [[packadd! packer.nvim]]
+    end
+    vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+end
+
+packer_init()
+
 function M.setup()
     local packer = require "packer"
 
@@ -267,6 +288,13 @@ function M.setup()
             "iamcco/markdown-preview.nvim",
             run = "cd app && yarn install",
             ft = "markdown",
+            cmd = { "MarkdownPreview" },
+        }
+        use {
+            "plasticboy/vim-markdown",
+            event = "VimEnter",
+            ft = "markdown",
+            requires = { "godlygeek/tabular" },
         }
 
         -- Lua
@@ -280,7 +308,7 @@ function M.setup()
             "folke/zen-mode.nvim",
             cmd = "ZenMode",
             config = function()
-                require("zen-mode").setup()
+                require("zen-mode").setup {}
             end,
         }
 
@@ -358,6 +386,14 @@ function M.setup()
         -- Copilot
         use { "github/copilot.vim" }
     end
+
+    if packer_bootstrap then
+        print "Setting up Neovim. Restart required after installation!"
+        require("packer").sync()
+    end
+
+    pcall(require, "impatient")
+    pcall(require, "packer_compiled")
 
     packer.init(conf)
     packer.startup(plugins)

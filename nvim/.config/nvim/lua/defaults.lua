@@ -1,17 +1,10 @@
 local M = {}
 
-local cmd = vim.cmd
-
-local bo = vim.bo
-local o = vim.o
-local wo = vim.wo
-
-local api = vim.api
-
-local indent = 4
-
 function M.setup()
-    cmd [[
+    vim.g.mapleader = " "
+    vim.g.maplocalleader = ","
+
+    vim.cmd [[
 	    syntax on
         filetype plugin indent on
         set tabstop=4 softtabstop=4

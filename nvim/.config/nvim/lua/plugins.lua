@@ -108,6 +108,9 @@ function M.setup()
             end,
         }
 
+        -- Restore session
+        use { "tpope/vim-obsession" }
+
         -- Async task dispatcher
         use { "tpope/vim-dispatch" }
 
@@ -144,6 +147,16 @@ function M.setup()
             cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
         }
 
+        -- Database
+        use {
+            "tpope/vim-dadbod",
+            event = "VimEnter",
+            requires = { "kristijanhusak/vim-dadbod-ui", "kristijanhusak/vim-dadbod-completion" },
+            config = function()
+                require("config.dadbod").setup()
+            end,
+        }
+
         -- Testing
         use {
             "rcarriga/vim-ultest",
@@ -154,6 +167,9 @@ function M.setup()
             end,
         }
 
+        -- Automatic identation detection
+        use { "tpope/vim-sleuth" }
+
         -- Movements
         use {
             "phaazon/hop.nvim",
@@ -162,6 +178,14 @@ function M.setup()
                 require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
             end,
         }
+        -- use { "psliwka/vim-smoothie" }
+        -- use {
+        --     "karb94/neoscroll.nvim",
+        --     config = function()
+        --         require("neoscroll").setup()
+        --     end,
+        -- }
+        use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
 
         -- Filemarks
         use {
@@ -199,12 +223,13 @@ function M.setup()
         }
 
         -- DAP
-        use { "mfussenegger/nvim-dap" }
-        use { "mfussenegger/nvim-dap-python" }
-        use { "theHamsta/nvim-dap-virtual-text" }
-        use { "rcarriga/nvim-dap-ui" }
-        use { "Pocco81/DAPInstall.nvim" }
-        use { "jbyuki/one-small-step-for-vimkind" }
+        use { "mfussenegger/nvim-dap", event = "BufWinEnter", as = "nvim-dap" }
+        use { "mfussenegger/nvim-dap-python", after = "nvim-dap" }
+        use { "leoluz/nvim-dap-go", after = "nvim-dap" }
+        use { "theHamsta/nvim-dap-virtual-text", after = "nvim-dap" }
+        use { "rcarriga/nvim-dap-ui", after = "nvim-dap" }
+        -- use { "Pocco81/dap-buddy.nvim", branch = "dev", after = "nvim-dap" }
+        use { "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" }
 
         -- LSP
         use {
@@ -308,7 +333,13 @@ function M.setup()
             "folke/zen-mode.nvim",
             cmd = "ZenMode",
             config = function()
-                require("zen-mode").setup {}
+                require("zen-mode").setup {
+                    window = { width = 250 },
+                    kitty = {
+                        enabled = true,
+                        font = "+4", -- font size increment
+                    },
+                }
             end,
         }
 
@@ -389,7 +420,6 @@ function M.setup()
 
     if packer_bootstrap then
         print "Setting up Neovim. Restart required after installation!"
-        require("packer").sync()
     end
 
     pcall(require, "impatient")

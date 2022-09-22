@@ -3,7 +3,25 @@ local M = {}
 local lsputils = require "config.lsp.utils"
 
 function M.config(installed_server)
-    return { cmd = installed_server._default_options.cmd }
+    return {
+        cmd = installed_server._default_options.cmd,
+        settings = {
+            python = {
+                analysis = {
+                    diagnosticSeverityOverrides = {
+                        reportGeneralTypeIssues = "none",
+                        reportOptionalIterable = "none",
+                        reportOptionalSubscript = "none",
+                        reportOptionalMemberAccess = "none",
+                        reportOptionalCall = "none",
+                        reportOptionalIterable = "none",
+                        reportOptionalContextManager = "none",
+                        reportOptionalOperand = "none",
+                    },
+                },
+            },
+        },
+    }
 end
 
 function M.setup(installed_server)
@@ -31,11 +49,7 @@ function M.keymappings()
     local mappings = {
         ["r"] = {
             name = "Run",
-            r = { ":update<CR>:exec '!python3' shellescape(@%, 1)<CR>", "Python run" },
-            d = { ":update<CR>:sp term://python3 -m pdb %<CR>", "PDB debug" },
-            w = { ":update<CR>:sp term://nodemon -e py %<CR>", "Nodemon watch" },
             c = { ":PyrightOrganizeImports<CR>", "Organize imports" },
-            l = { ":update<CR>:exec '!python3'<CR>", "REPL" },
         },
     }
     wk.register(mappings, opts)

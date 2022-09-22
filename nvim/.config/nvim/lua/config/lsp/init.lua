@@ -2,7 +2,7 @@ local M = {}
 
 local lsp_installer = require "nvim-lsp-installer"
 
-local lsp_providers = { sumneko_lua = true, tsserver = true, pyright = true, gopls = true }
+local lsp_providers = { sumneko_lua = true, tsserver = true, gopls = true, pyright = true }
 
 local function install_servers()
     for name, _ in pairs(lsp_providers) do

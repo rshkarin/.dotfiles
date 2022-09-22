@@ -77,6 +77,15 @@ function M.setup()
             end,
         }
 
+        -- Refactoring
+        use {
+            "ThePrimeagen/refactoring.nvim",
+            requires = {
+                { "nvim-lua/plenary.nvim" },
+                { "nvim-treesitter/nvim-treesitter" },
+            },
+        }
+
         -- Treesitter
         use {
             "nvim-treesitter/nvim-treesitter",

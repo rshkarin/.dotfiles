@@ -134,6 +134,7 @@ local vmappings = {
     r = {
         name = "Run",
         s = { "<Cmd>lua require'sniprun'.run('v')<CR>", "Run snippets" },
+        r = { "<Esc><Cmd>lua require('telescope').extensions.refactoring.refactors()<CR>", "Refactor" },
     },
     b = {
         name = "Buffer",

@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     require("nvim-treesitter.configs").setup {
-        ensure_installed = "maintained",
+        ensure_installed = "all",
         ignore_install = { "tlaplus" },
         indent = { enable = true },
         highlight = { enable = true },

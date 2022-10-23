@@ -1,11 +1,42 @@
 local M = {}
 
+local packer_bootstrap = false
+
+local function packer_init()
+    local fn = vim.fn
+    local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+    if fn.empty(fn.glob(install_path)) > 0 then
+        packer_bootstrap = fn.system {
+            "git",
+            "clone",
+            "--depth",
+            "1",
+            "https://github.com/wbthomason/packer.nvim",
+            install_path,
+        }
+        vim.cmd [[packadd packer.nvim]]
+    end
+    -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+end
+
+packer_init()
+
 function M.setup()
     local packer = require "packer"
 
-    local conf = { compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua", max_jobs = 50 }
+    local conf = {
+        profile = {
+            enable = true,
+            threshold = 1, -- the amount in ms that a plugin's load time must be over for it to be included in the profile
+        },
+        compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+        max_jobs = 16,
+    }
 
     local function plugins(use)
+        -- Caching compiled lua modules
+        use { "lewis6991/impatient.nvim" }
+
         -- Packer can manage itself as an optional plugin
         use { "wbthomason/packer.nvim", opt = true }
 
@@ -56,6 +87,15 @@ function M.setup()
             end,
         }
 
+        -- Refactoring
+        use {
+            "ThePrimeagen/refactoring.nvim",
+            requires = {
+                { "nvim-lua/plenary.nvim" },
+                { "nvim-treesitter/nvim-treesitter" },
+            },
+        }
+
         -- Treesitter
         use {
             "nvim-treesitter/nvim-treesitter",
@@ -87,15 +127,15 @@ function M.setup()
             end,
         }
 
+        -- Restore session
+        use { "tpope/vim-obsession" }
+
         -- Async task dispatcher
         use { "tpope/vim-dispatch" }
 
         -- Local text manipulations
         use { "tpope/vim-surround" }
         use { "tpope/vim-commentary" }
-
-        -- Caching compiled lua modules
-        use { "lewis6991/impatient.nvim" }
 
         -- Escape insert mode with double j
         use {
@@ -123,15 +163,28 @@ function M.setup()
             cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
         }
 
-        -- Testing
+        -- Database
         use {
-            "rcarriga/vim-ultest",
-            run = ":UpdateRemotePlugins",
-            requires = { "vim-test/vim-test" },
+            "tpope/vim-dadbod",
+            event = "VimEnter",
+            requires = { "kristijanhusak/vim-dadbod-ui", "kristijanhusak/vim-dadbod-completion" },
             config = function()
-                require("config.test").setup()
+                require("config.dadbod").setup()
             end,
         }
+
+        -- Testing
+        use {
+            "nvim-neotest/neotest",
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "nvim-treesitter/nvim-treesitter",
+                "antoinemadec/FixCursorHold.nvim",
+            },
+        }
+
+        -- Automatic identation detection
+        use { "tpope/vim-sleuth" }
 
         -- Movements
         use {
@@ -141,6 +194,14 @@ function M.setup()
                 require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
             end,
         }
+        -- use { "psliwka/vim-smoothie" }
+        -- use {
+        --     "karb94/neoscroll.nvim",
+        --     config = function()
+        --         require("neoscroll").setup()
+        --     end,
+        -- }
+        use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
 
         -- Filemarks
         use {
@@ -178,14 +239,16 @@ function M.setup()
         }
 
         -- DAP
-        use { "mfussenegger/nvim-dap" }
-        use { "mfussenegger/nvim-dap-python" }
-        use { "theHamsta/nvim-dap-virtual-text" }
-        use { "rcarriga/nvim-dap-ui" }
-        use { "Pocco81/DAPInstall.nvim" }
-        use { "jbyuki/one-small-step-for-vimkind" }
+        use { "mfussenegger/nvim-dap", event = "BufWinEnter", as = "nvim-dap" }
+        use { "mfussenegger/nvim-dap-python", after = "nvim-dap" }
+        use { "leoluz/nvim-dap-go", after = "nvim-dap" }
+        use { "theHamsta/nvim-dap-virtual-text", after = "nvim-dap" }
+        use { "rcarriga/nvim-dap-ui", after = "nvim-dap" }
+        -- use { "Pocco81/dap-buddy.nvim", branch = "dev", after = "nvim-dap" }
+        use { "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" }
 
         -- LSP
+        use { "williamboman/nvim-lsp-installer" }
         use {
             "neovim/nvim-lspconfig",
             config = function()
@@ -194,7 +257,6 @@ function M.setup()
             end,
         }
         use { "jose-elias-alvarez/null-ls.nvim" }
-        use { "williamboman/nvim-lsp-installer" }
 
         -- LSP Improvements
         use {
@@ -213,7 +275,7 @@ function M.setup()
             cmd = { "TroubleToggle", "Trouble" },
             config = function()
                 require("trouble").setup {
-                    mode = "document_diagnostics",
+                    mode = "workspace_diagnostics",
                 }
             end,
         }
@@ -267,6 +329,13 @@ function M.setup()
             "iamcco/markdown-preview.nvim",
             run = "cd app && yarn install",
             ft = "markdown",
+            cmd = { "MarkdownPreview" },
+        }
+        use {
+            "plasticboy/vim-markdown",
+            event = "VimEnter",
+            ft = "markdown",
+            requires = { "godlygeek/tabular" },
         }
 
         -- Lua
@@ -280,7 +349,13 @@ function M.setup()
             "folke/zen-mode.nvim",
             cmd = "ZenMode",
             config = function()
-                require("zen-mode").setup()
+                require("zen-mode").setup {
+                    window = { width = 250 },
+                    kitty = {
+                        enabled = true,
+                        font = "+4", -- font size increment
+                    },
+                }
             end,
         }
 
@@ -357,44 +432,24 @@ function M.setup()
 
         -- Copilot
         use { "github/copilot.vim" }
+
+        -- Text manipulation
+        use {
+            "AndrewRadev/splitjoin.vim",
+            keys = { "gJ", "gS" },
+        }
     end
+
+    if packer_bootstrap then
+        print "Setting up Neovim. Restart required after installation!"
+        require("packer").sync()
+    end
+
+    pcall(require, "impatient")
+    pcall(require, "packer_compiled")
 
     packer.init(conf)
     packer.startup(plugins)
 end
 
 return M
-
---[[
-
-
-    " Indent vertical lines
-    Plug
-
-    " Move over doc via automatically created mark
-    Plug 'phaazon/hop.nvim'
-
-    " Zen mode
-    Plug 'folke/zen-mode.nvim'
-
-    " Icons
-    Plug 'kyazdani42/nvim-web-devicons'
-
-    " Folder tree (seems to similar to telescope filebroswer)
-    Plug 'kyazdani42/nvim-tree.lua'
-
-    " Debug adapter protocol
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'nvim-telescope/telescope-dap.nvim'
-
-    " Debug individual test
-    Plug 'leoluz/nvim-dap-go'
-
-    " Quickfix list with issues
-    Plug 'folke/trouble.nvim'
-
-    " Pictograms on completion window
-    Plug 'onsails/lspkind-nvim'
-
-    " Add support more flexible selection within pair characters
-    Plug 'wellle/targets.vim' ]]

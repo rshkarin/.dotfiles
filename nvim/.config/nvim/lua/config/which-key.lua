@@ -134,6 +134,7 @@ local vmappings = {
     r = {
         name = "Run",
         s = { "<Cmd>lua require'sniprun'.run('v')<CR>", "Run snippets" },
+        r = { "<Esc><Cmd>lua require('telescope').extensions.refactoring.refactors()<CR>", "Refactor" },
     },
     b = {
         name = "Buffer",
@@ -151,7 +152,7 @@ local lsp_mappings = {
         D = { "<Cmd>lua vim.lsp.buf.type_definition()<CR>", "Type definitions" },
         a = { "<Cmd>lua require('telescope.builtin').lsp_code_actions()<CR>", "Code actions" },
         n = { "<Cmd>update<CR>:Neoformat<CR>", "Neoformat" },
-        t = { "<Cmd>TroubleToggle<CR>", "Trouble" },
+        t = { "<Cmd>TroubleToggle workspace_diagnostics<CR>", "Trouble" },
     },
     r = {
         n = { "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
@@ -162,11 +163,11 @@ local hop_mappings = {
     f = {
         name = "Hop",
         f = {
-            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+            "<Cmd>HopWordCurrentLine<cr>",
             "Line hop",
         },
         t = {
-            "<Cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>",
+            "<Cmd>HopWord<cr>",
             "Global hop",
         },
     },

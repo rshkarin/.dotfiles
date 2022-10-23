@@ -14,9 +14,9 @@ local function packer_init()
             "https://github.com/wbthomason/packer.nvim",
             install_path,
         }
-        vim.cmd [[packadd! packer.nvim]]
+        vim.cmd [[packadd packer.nvim]]
     end
-    vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+    -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
 end
 
 packer_init()
@@ -24,9 +24,19 @@ packer_init()
 function M.setup()
     local packer = require "packer"
 
-    local conf = { compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua", max_jobs = 50 }
+    local conf = {
+        profile = {
+            enable = true,
+            threshold = 1, -- the amount in ms that a plugin's load time must be over for it to be included in the profile
+        },
+        compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+        max_jobs = 16,
+    }
 
     local function plugins(use)
+        -- Caching compiled lua modules
+        use { "lewis6991/impatient.nvim" }
+
         -- Packer can manage itself as an optional plugin
         use { "wbthomason/packer.nvim", opt = true }
 
@@ -127,9 +137,6 @@ function M.setup()
         use { "tpope/vim-surround" }
         use { "tpope/vim-commentary" }
 
-        -- Caching compiled lua modules
-        use { "lewis6991/impatient.nvim" }
-
         -- Escape insert mode with double j
         use {
             "max397574/better-escape.nvim",
@@ -168,12 +175,12 @@ function M.setup()
 
         -- Testing
         use {
-            "rcarriga/vim-ultest",
-            run = ":UpdateRemotePlugins",
-            requires = { "vim-test/vim-test" },
-            config = function()
-                require("config.test").setup()
-            end,
+            "nvim-neotest/neotest",
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "nvim-treesitter/nvim-treesitter",
+                "antoinemadec/FixCursorHold.nvim",
+            },
         }
 
         -- Automatic identation detection
@@ -241,6 +248,7 @@ function M.setup()
         use { "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" }
 
         -- LSP
+        use { "williamboman/nvim-lsp-installer" }
         use {
             "neovim/nvim-lspconfig",
             config = function()
@@ -249,7 +257,6 @@ function M.setup()
             end,
         }
         use { "jose-elias-alvarez/null-ls.nvim" }
-        use { "williamboman/nvim-lsp-installer" }
 
         -- LSP Improvements
         use {
@@ -425,10 +432,17 @@ function M.setup()
 
         -- Copilot
         use { "github/copilot.vim" }
+
+        -- Text manipulation
+        use {
+            "AndrewRadev/splitjoin.vim",
+            keys = { "gJ", "gS" },
+        }
     end
 
     if packer_bootstrap then
         print "Setting up Neovim. Restart required after installation!"
+        require("packer").sync()
     end
 
     pcall(require, "impatient")

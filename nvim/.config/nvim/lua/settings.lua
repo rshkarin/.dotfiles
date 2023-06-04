@@ -1,47 +1,35 @@
-local M = {}
+vim.cmd [[
+    let g:gruvbox_contrast_dark = "medium"
+    colorscheme gruvbox
+    highlight Normal guibg=none
 
-function M.auto_cmds()
-    vim.cmd [[
-        let g:gruvbox_contrast_dark = "medium"
-        colorscheme gruvbox
-        highlight Normal guibg=none
+    " let g:gruvbox_material_background = "medium"
+    " let g:gruvbox_material_palette = "original"
+    " colorscheme gruvbox-material
+    ]]
 
-        " let g:gruvbox_material_background = "medium"
-        " let g:gruvbox_material_palette = "original"
-        " colorscheme gruvbox-material
-        ]]
+vim.api.nvim_exec(
+    [[
+        fun! TrimWhitespace()
+            let l:save = winsaveview()
+            keeppatterns %s/\s\+$//e
+            call winrestview(l:save)
+        endfun
 
-    vim.api.nvim_exec(
-        [[
-            fun! TrimWhitespace()
-                let l:save = winsaveview()
-                keeppatterns %s/\s\+$//e
-                call winrestview(l:save)
-            endfun
+        augroup REPEATED
+            autocmd!
+            autocmd BufWritePre * :call TrimWhitespace()
+        augroup END
+    ]],
+    false
+)
 
-            augroup REPEATED
-                autocmd!
-                autocmd BufWritePre * :call TrimWhitespace()
-            augroup END
-        ]],
-        false
-    )
-
-    vim.api.nvim_exec(
-        [[
-            augroup YankHighlight
-                autocmd!
-                autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
-            augroup END
-        ]],
-        false
-    )
-end
-
-function M.setup()
-    M.auto_cmds()
-
-    -- vim.g.python3_host_prog = "/usr/local/bin/python3"
-end
-
-return M
+vim.api.nvim_exec(
+    [[
+        augroup YankHighlight
+            autocmd!
+            autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+        augroup END
+    ]],
+    false
+)

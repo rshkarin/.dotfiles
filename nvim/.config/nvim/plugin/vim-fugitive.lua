@@ -1,0 +1,7 @@
+vim.keymap.set("n", "<leader>gs", "<Cmd>Git<CR>")
+vim.keymap.set("n", "<leader>gp", "<Cmd>Git push<CR>")
+vim.keymap.set("n", "<leader>gb", "<Cmd>Git branch<CR>")
+vim.keymap.set("n", "<leader>ge", "<Cmd>Git commit<CR>")
+vim.keymap.set("n", "<leader>gx", "<Cmd>Gvdiffsplit<CR>")
+vim.keymap.set("n", "<leader>gf", "<Cmd>Git fetch --all<CR>")
+vim.keymap.set("n", "<leader>gx", "<Cmd>Gvdiffsplit<CR>")

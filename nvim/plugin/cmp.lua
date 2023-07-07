@@ -19,11 +19,6 @@ cmp.setup {
     end,
     formatting = {
         format = lspkind.cmp_format {
-<<<<<<< HEAD:nvim/.config/nvim/plugin/cmp.lua
-            mode = "text",
-            maxwidth = 50,
-            ellipsis_char = '...'
-=======
             mode = "symbol",
             maxwidth = 50,
             ellipsis_char = "...",
@@ -54,7 +49,6 @@ cmp.setup {
                 Operator = "󰆕",
                 TypeParameter = "",
             },
->>>>>>> e707b21 (Update location of nvim config):nvim/plugin/cmp.lua
         },
     },
     snippet = {

@@ -19,9 +19,42 @@ cmp.setup {
     end,
     formatting = {
         format = lspkind.cmp_format {
+<<<<<<< HEAD:nvim/.config/nvim/plugin/cmp.lua
             mode = "text",
             maxwidth = 50,
             ellipsis_char = '...'
+=======
+            mode = "symbol",
+            maxwidth = 50,
+            ellipsis_char = "...",
+            symbol_map = {
+                Text = "󰉿",
+                Method = "󰆧",
+                Function = "󰊕",
+                Constructor = "",
+                Field = "󰜢",
+                Variable = "󰀫",
+                Class = "󰠱",
+                Interface = "",
+                Module = "",
+                Property = "󰜢",
+                Unit = "󰑭",
+                Value = "󰎠",
+                Enum = "",
+                Keyword = "󰌋",
+                Snippet = "",
+                Color = "󰏘",
+                File = "󰈙",
+                Reference = "󰈇",
+                Folder = "󰉋",
+                EnumMember = "",
+                Constant = "󰏿",
+                Struct = "󰙅",
+                Event = "",
+                Operator = "󰆕",
+                TypeParameter = "",
+            },
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/cmp.lua
         },
     },
     snippet = {

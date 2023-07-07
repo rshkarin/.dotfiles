@@ -148,11 +148,24 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/roman/.local/share/nvim/site/pack/packer/start/cmp-tmux",
     url = "https://github.com/andersevenrud/cmp-tmux"
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
+=======
   },
   cmp_luasnip = {
     loaded = true,
     path = "/Users/roman/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["debugpy.nvim"] = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/debugpy.nvim",
+    url = "https://github.com/HiPhish/debugpy.nvim"
   },
   ["debugpy.nvim"] = {
     loaded = true,
@@ -167,11 +180,24 @@ _G.packer_plugins = {
     path = "/Users/roman/.local/share/nvim/site/pack/packer/opt/diffview.nvim",
     url = "https://github.com/sindrets/diffview.nvim"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
   ["fidget.nvim"] = {
     loaded = true,
     path = "/Users/roman/.local/share/nvim/site/pack/packer/start/fidget.nvim",
     url = "https://github.com/j-hui/fidget.nvim"
   },
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
+=======
+  ["flit.nvim"] = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/flit.nvim",
+    url = "https://github.com/ggandor/flit.nvim"
+  },
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/roman/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -261,6 +287,7 @@ _G.packer_plugins = {
   },
   ["mason-lspconfig.nvim"] = {
     load_after = {},
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
     loaded = true,
     needs_bufread = false,
     path = "/Users/roman/.local/share/nvim/site/pack/packer/opt/mason-lspconfig.nvim",
@@ -294,9 +321,39 @@ _G.packer_plugins = {
     url = "https://github.com/zbirenbaum/neodim"
   },
   neoformat = {
+=======
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
     loaded = true,
-    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/neoformat",
-    url = "https://github.com/sbdchd/neoformat"
+    needs_bufread = false,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/opt/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason-null-ls.nvim"] = {
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/opt/mason-null-ls.nvim",
+    url = "https://github.com/jayp0521/mason-null-ls.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["neo-tree.nvim"] = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
+  ["neodev.nvim"] = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+    url = "https://github.com/folke/neodev.nvim"
+  },
+  neodim = {
+    loaded = true,
+    path = "/Users/roman/.local/share/nvim/site/pack/packer/start/neodim",
+    url = "https://github.com/zbirenbaum/neodim"
   },
   neotest = {
     loaded = true,
@@ -549,7 +606,11 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope-symbols.nvim"
   },
   ["telescope.nvim"] = {
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
     after = { "telescope-frecency.nvim", "telescope-file-browser.nvim", "telescope-dap.nvim", "telescope-symbols.nvim", "telescope-media-files.nvim", "telescope-project.nvim" },
+=======
+    after = { "telescope-frecency.nvim", "telescope-file-browser.nvim", "telescope-media-files.nvim", "telescope-symbols.nvim", "telescope-project.nvim", "telescope-dap.nvim" },
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
     commands = { "Telescope" },
     loaded = false,
     needs_bufread = true,
@@ -675,14 +736,38 @@ time([[Setup for markdown-preview.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd mason.nvim ]]
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
 vim.cmd [[ packadd nvim-lspconfig ]]
 vim.cmd [[ packadd mason-lspconfig.nvim ]]
 vim.cmd [[ packadd null-ls.nvim ]]
 vim.cmd [[ packadd mason-null-ls.nvim ]]
+=======
+vim.cmd [[ packadd null-ls.nvim ]]
+vim.cmd [[ packadd mason-null-ls.nvim ]]
+vim.cmd [[ packadd nvim-lspconfig ]]
+vim.cmd [[ packadd mason-lspconfig.nvim ]]
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
 time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
+=======
+pcall(vim.api.nvim_create_user_command, 'DiffviewToggleFiles', function(cmdargs)
+          require('packer.load')({'diffview.nvim'}, { cmd = 'DiffviewToggleFiles', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'diffview.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('DiffviewToggleFiles ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'DiffviewFocusFiles', function(cmdargs)
+          require('packer.load')({'diffview.nvim'}, { cmd = 'DiffviewFocusFiles', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'diffview.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('DiffviewFocusFiles ', 'cmdline')
+      end})
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
 pcall(vim.api.nvim_create_user_command, 'Trouble', function(cmdargs)
           require('packer.load')({'trouble.nvim'}, { cmd = 'Trouble', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -690,12 +775,35 @@ pcall(vim.api.nvim_create_user_command, 'Trouble', function(cmdargs)
           require('packer.load')({'trouble.nvim'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('Trouble ', 'cmdline')
       end})
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
 pcall(vim.api.nvim_create_user_command, 'TroubleToggle', function(cmdargs)
           require('packer.load')({'trouble.nvim'}, { cmd = 'TroubleToggle', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
         {nargs = '*', range = true, bang = true, complete = function()
           require('packer.load')({'trouble.nvim'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('TroubleToggle ', 'cmdline')
+=======
+pcall(vim.api.nvim_create_user_command, 'ZenMode', function(cmdargs)
+          require('packer.load')({'zen-mode.nvim'}, { cmd = 'ZenMode', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'zen-mode.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('ZenMode ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'DiffviewClose', function(cmdargs)
+          require('packer.load')({'diffview.nvim'}, { cmd = 'DiffviewClose', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'diffview.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('DiffviewClose ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'StartupTime', function(cmdargs)
+          require('packer.load')({'startuptime.vim'}, { cmd = 'StartupTime', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'startuptime.vim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('StartupTime ', 'cmdline')
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
       end})
 pcall(vim.api.nvim_create_user_command, 'TSHighlightCapturesUnderCursor', function(cmdargs)
           require('packer.load')({'playground'}, { cmd = 'TSHighlightCapturesUnderCursor', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
@@ -704,6 +812,7 @@ pcall(vim.api.nvim_create_user_command, 'TSHighlightCapturesUnderCursor', functi
           require('packer.load')({'playground'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('TSHighlightCapturesUnderCursor ', 'cmdline')
       end})
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
 pcall(vim.api.nvim_create_user_command, 'ZenMode', function(cmdargs)
           require('packer.load')({'zen-mode.nvim'}, { cmd = 'ZenMode', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -711,6 +820,8 @@ pcall(vim.api.nvim_create_user_command, 'ZenMode', function(cmdargs)
           require('packer.load')({'zen-mode.nvim'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('ZenMode ', 'cmdline')
       end})
+=======
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
 pcall(vim.api.nvim_create_user_command, 'Telescope', function(cmdargs)
           require('packer.load')({'telescope.nvim'}, { cmd = 'Telescope', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -725,6 +836,7 @@ pcall(vim.api.nvim_create_user_command, 'DiffviewOpen', function(cmdargs)
           require('packer.load')({'diffview.nvim'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('DiffviewOpen ', 'cmdline')
       end})
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
 pcall(vim.api.nvim_create_user_command, 'DiffviewClose', function(cmdargs)
           require('packer.load')({'diffview.nvim'}, { cmd = 'DiffviewClose', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -752,6 +864,14 @@ pcall(vim.api.nvim_create_user_command, 'DiffviewFocusFiles', function(cmdargs)
         {nargs = '*', range = true, bang = true, complete = function()
           require('packer.load')({'diffview.nvim'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('DiffviewFocusFiles ', 'cmdline')
+=======
+pcall(vim.api.nvim_create_user_command, 'TroubleToggle', function(cmdargs)
+          require('packer.load')({'trouble.nvim'}, { cmd = 'TroubleToggle', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'trouble.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('TroubleToggle ', 'cmdline')
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
       end})
 time([[Defining lazy-load commands]], false)
 
@@ -763,7 +883,11 @@ vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-prev
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
+<<<<<<< HEAD:nvim/.config/nvim/plugin/packer_compiled.lua
 vim.cmd [[au VimEnter * ++once lua require("packer.load")({'vim-rhubarb', 'trouble.nvim', 'quick-scope'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+=======
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'quick-scope', 'vim-rhubarb', 'trouble.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+>>>>>>> e707b21 (Update location of nvim config):nvim/plugin/packer_compiled.lua
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

@@ -84,7 +84,11 @@ mason_lspconfig.setup_handlers {
             settings = {
                 Lua = {
                     format = {
-                        enable = false,
+                        enable = true,
+                        defaultConfig = {
+                            indent_style = "space",
+                            indent_size = "4",
+                        },
                     },
                     hint = {
                         enable = true,

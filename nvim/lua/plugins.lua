@@ -198,6 +198,9 @@ function M.setup()
         --     },
         -- }
 
+        -- Improved yank
+        use { "gbprod/yanky.nvim" }
+
         -- Fast left-right movement
         use { "unblevable/quick-scope", event = "VimEnter" }
 

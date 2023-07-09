@@ -6,15 +6,6 @@ if not ok then
     return
 end
 
--- lualine.setup {
---     options = { theme = "gruvbox" },
---     sections = {
---         lualine_c = { "filename", { navic.get_location, cond = navic.is_available },
---         },
---     },
--- }
-
-
 local function attached_clients()
     return "(" .. vim.tbl_count(vim.lsp.buf_get_clients(0)) .. ")"
 end

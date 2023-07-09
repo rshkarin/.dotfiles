@@ -231,7 +231,7 @@ function M.setup()
         -- use { "jbyuki/one-small-step-for-vimkind", after = "nvim-dap" }
 
         -- Environment Management
-        -- use { "petobens/poet-v" }
+        use { "petobens/poet-v" }
 
         -- LSP
         use {

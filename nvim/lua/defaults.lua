@@ -37,4 +37,4 @@ vim.cmd [[
     set wildignore+=**/.git/*
     ]]
 
-vim.g.python3_host_prog = '~/.asdf/shims/python3'
+vim.g.python3_host_prog = '~/.asdf/installs/python/3.9.0/bin/python'

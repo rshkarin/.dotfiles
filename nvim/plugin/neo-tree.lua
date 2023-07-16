@@ -1,10 +1,3 @@
--- local ok, _ = pcall(require, "neo-tree")
--- if not ok then
---     return
--- end
---
--- vim.keymap.set("n", "<leader>fe", "<Cmd>NeoTreeRevealToggle<CR>")
---
 local ok, neotree, inputs = pcall(function()
     return require "neo-tree", require "neo-tree.ui.inputs"
 end)

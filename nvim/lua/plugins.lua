@@ -1,56 +1,32 @@
 local M = {}
 
 function M.setup()
-    -- Indicate first time installation
-    local packer_bootstrap = false
-
-    -- packer.nvim configuration
-    local conf = {
-        profile = {
-            enable = true,
-            threshold = 0, -- the amount in ms that a plugin's load time must be over for it to be included in the profile
-        },
-        max_jobs = 10,
-    }
-
-    -- Check if packer.nvim is installed
-    -- Run PackerCompile if there are changes in this file
-
-    local function packer_init()
-        local fn = vim.fn
-        local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-        if fn.empty(fn.glob(install_path)) > 0 then
-            packer_bootstrap = fn.system {
+    local function lazy_init()
+        local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+        if not vim.loop.fs_stat(lazypath) then
+            vim.fn.system {
                 "git",
                 "clone",
-                "--depth",
-                "1",
-                "https://github.com/wbthomason/packer.nvim",
-                install_path,
+                "--filter=blob:none",
+                "https://github.com/folke/lazy.nvim.git",
+                "--branch=stable", -- latest stable release
+                lazypath,
             }
-            vim.cmd [[packadd packer.nvim]]
         end
-
-        -- Run PackerCompile if there are changes in this file
-        local packer_grp = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
-        vim.api.nvim_create_autocmd(
-            { "BufWritePost" },
-            { pattern = "plugins.lua", command = "source <afile> | PackerCompile", group = packer_grp }
-        )
+        vim.opt.rtp:prepend(lazypath)
     end
 
     -- Plugins
-    local function plugins(use)
-        use { "wbthomason/packer.nvim" }
+    local function plugins()
+        return {
+            -- Load only when require
+            { "nvim-lua/plenary.nvim"},
 
-        -- Performance
-        use { "lewis6991/impatient.nvim" }
+            -- Telescope
+            { "ahmedkhalf/project.nvim" },
 
-        -- Load only when require
-        use { "nvim-lua/plenary.nvim", module = "plenary" }
+        }
 
-        -- Telescope
-        use { "ahmedkhalf/project.nvim" }
 
         use {
             "nvim-telescope/telescope.nvim",
@@ -391,8 +367,8 @@ function M.setup()
 
         -- Status line
         use {
-            'nvim-lualine/lualine.nvim',
-            requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+            "nvim-lualine/lualine.nvim",
+            requires = { "nvim-tree/nvim-web-devicons", opt = true },
         }
         use {
             "SmiteshP/nvim-navic",
@@ -401,23 +377,12 @@ function M.setup()
 
         -- Metrics
         use { "tweekmonster/startuptime.vim", cmd = { "StartupTime" } }
-
-        -- Bootstrap Neovim
-        if packer_bootstrap then
-            print "Neovim restart is required after installation!"
-            require("packer").sync()
-        end
     end
 
     -- Init and start packer
-    packer_init()
-    local packer = require "packer"
+    lazy_init()
+    require("lazy").setup(plugins())
 
-    -- Performance
-    pcall(require, "impatient")
-
-    packer.init(conf)
-    packer.startup(plugins)
 end
 
 return M

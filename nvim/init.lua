@@ -1,3 +1,4 @@
-require('defaults')
-require('settings')
-require("plugins").setup()
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+require("config.lazy")

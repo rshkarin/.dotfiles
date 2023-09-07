@@ -1,21 +1,87 @@
 return {
+    -- file explorer
+    -- {
+    --     "nvim-neo-tree/neo-tree.nvim",
+    --     branch = "v3.x",
+    --     cmd = "Neotree",
+    --     keys = {
+    --         {
+    --             "<leader>fe",
+    --             function()
+    --                 require("neo-tree.command").execute { toggle = true, dir = require("util.core").get_root() }
+    --             end,
+    --             desc = "Explorer NeoTree (root dir)",
+    --         },
+    --         {
+    --             "<leader>fE",
+    --             function()
+    --                 require("neo-tree.command").execute { toggle = true, dir = vim.loop.cwd() }
+    --             end,
+    --             desc = "Explorer NeoTree (cwd)",
+    --         },
+    --     },
+    --     deactivate = function()
+    --         vim.cmd [[Neotree close]]
+    --     end,
+    --     init = function()
+    --         if vim.fn.argc() == 1 then
+    --             local stat = vim.loop.fs_stat(vim.fn.argv(0))
+    --             if stat and stat.type == "directory" then
+    --                 require "neo-tree"
+    --             end
+    --         end
+    --     end,
+    --     opts = {
+    --         sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+    --         open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
+    --         filesystem = {
+    --             bind_to_cwd = false,
+    --             follow_current_file = { enabled = true },
+    --             use_libuv_file_watcher = true,
+    --         },
+    --         window = {
+    --             mappings = {
+    --                 ["<space>"] = "none",
+    --             },
+    --         },
+    --         default_component_configs = {
+    --             indent = {
+    --                 with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+    --                 expander_collapsed = "",
+    --                 expander_expanded = "",
+    --                 expander_highlight = "NeoTreeExpander",
+    --             },
+    --         },
+    --     },
+    --     config = function(_, opts)
+    --         require("neo-tree").setup(opts)
+    --         vim.api.nvim_create_autocmd("TermClose", {
+    --             pattern = "*lazygit",
+    --             callback = function()
+    --                 if package.loaded["neo-tree.sources.git_status"] then
+    --                     require("neo-tree.sources.git_status").refresh()
+    --                 end
+    --             end,
+    --         })
+    --     end,
+    -- },
 
-  -- file explorer
+    -- file explorer
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         dependencies = {
-          "nvim-lua/plenary.nvim",
-          "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-          "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
         },
         init = function()
-          if vim.fn.argc() == 1 then
-            local stat = vim.loop.fs_stat(vim.fn.argv(0))
-            if stat and stat.type == "directory" then
-              require("neo-tree")
+            if vim.fn.argc() == 1 then
+                local stat = vim.loop.fs_stat(vim.fn.argv(0))
+                if stat and stat.type == "directory" then
+                    require "neo-tree"
+                end
             end
-          end
         end,
         opts = {
             close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
@@ -42,8 +108,8 @@ return {
                 icon = {
                     folder_closed = "",
                     folder_open = "",
-                    folder_empty = "ﰊ",
-                    default = "*",
+                    folder_empty = "",
+                    default = "",
                 },
                 modified = {
                     symbol = "[+]",
@@ -149,7 +215,7 @@ return {
         config = function(_, opts)
             require("neo-tree").setup(opts)
 
-            local inputs = require("neo-tree.ui.inputs")
+            local inputs = require "neo-tree.ui.inputs"
 
             inputs.confirm = function(message, callback)
                 callback(vim.fn.confirm(message, "&Yes\n&No") == 1)
@@ -164,63 +230,64 @@ return {
                 end
                 callback(input)
             end
-
-            vim.keymap.set("n", "<leader>b", "<cmd>Neotree toggle show buffers right<cr>")
-            vim.keymap.set("n", "<leader>fe", "<cmd>Neotree toggle left<cr>")
         end,
+        keys = {
+            { "<leader>b", mode = { "n" }, "<cmd>Neotree toggle show buffers right<cr>", desc = "Show neotree" },
+            { "<leader>fe", mode = { "n" }, "<cmd>Neotree toggle left<cr>", desc = "Toggle neotree" },
+        },
     },
     {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.2',
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.2",
         dependencies = {
-            'nvim-lua/plenary.nvim',
+            "nvim-lua/plenary.nvim",
             -- project management
             {
                 "ahmedkhalf/project.nvim",
                 opts = {},
                 config = function(_, opts)
-                  require("project_nvim").setup(opts)
-                  require("telescope").load_extension("projects")
+                    require("project_nvim").setup(opts)
+                    require("telescope").load_extension "projects"
                 end,
                 keys = {
-                  { "<leader>pp", "<Cmd>Telescope projects<CR>" },
+                    { "<leader>pp", "<Cmd>Telescope projects<CR>" },
                 },
             },
             {
                 "nvim-telescope/telescope-frecency.nvim",
-                dependencies = {"kkharji/sqlite.lua"},
+                dependencies = { "kkharji/sqlite.lua" },
                 config = function()
-                    require("telescope").load_extension("frecency")
+                    require("telescope").load_extension "frecency"
                 end,
             },
             {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
                 config = function()
-                    require("telescope").load_extension("fzf")
+                    require("telescope").load_extension "fzf"
                 end,
             },
             {
                 "nvim-telescope/telescope-file-browser.nvim",
                 dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
                 config = function()
-                    require("telescope").load_extension("file_browser")
+                    require("telescope").load_extension "file_browser"
                 end,
             },
             {
                 "AckslD/nvim-neoclip.lua",
-                dependencies = {"kkharji/sqlite.lua"},
+                dependencies = { "kkharji/sqlite.lua" },
                 config = function()
-                    require('neoclip').setup()
-                    require("telescope").load_extension("neoclip")
+                    require("neoclip").setup()
+                    require("telescope").load_extension "neoclip"
                 end,
             },
             {
                 "debugloop/telescope-undo.nvim",
                 config = function()
-                    require("telescope").load_extension("undo")
+                    require("telescope").load_extension "undo"
                 end,
-            }
+            },
         },
         cmd = "Telescope",
         version = false,
@@ -257,6 +324,27 @@ return {
                 },
                 path_display = { truncate = 3 },
                 color_devicons = true,
+                mappings = {
+                    i = {
+                        ["<C-Down>"] = function(...)
+                            return require("telescope.actions").cycle_history_next(...)
+                        end,
+                        ["<C-Up>"] = function(...)
+                            return require("telescope.actions").cycle_history_prev(...)
+                        end,
+                        ["<C-f>"] = function(...)
+                            return require("telescope.actions").preview_scrolling_down(...)
+                        end,
+                        ["<C-b>"] = function(...)
+                            return require("telescope.actions").preview_scrolling_up(...)
+                        end,
+                    },
+                    n = {
+                        ["q"] = function(...)
+                            return require("telescope.actions").close(...)
+                        end,
+                    },
+                },
                 set_env = { ["COLORTERM"] = "truecolor" },
                 extensions = {
                     fzf = {
@@ -275,251 +363,279 @@ return {
                         layout_config = {
                             preview_height = 0.8,
                         },
+                        mappings = {
+                            i = {
+                                ["<CR>"] = function(...)
+                                    return require("telescope-undo.actions").yank_additions(...)
+                                end,
+                                ["<S-CR>"] = function(...)
+                                    return require("telescope-undo.actions").yank_deletions(...)
+                                end,
+                                ["<C-CR>"] = function(...)
+                                    return require("telescope-undo.actions").restore(...)
+                                end,
+                            },
+                        },
                     },
                 },
             },
         },
-        config = function(_, opts)
-            local telescope = require("telescope")
-
-            opts.mappings = {
-                    i = {
-                        ["<C-j>"] = require("telescope.actions").move_selection_next,
-                        ["<C-k>"] = require("telescope.actions").move_selection_previous,
-                        ["<C-n>"] = require("telescope.actions").cycle_history_next,
-                        ["<C-p>"] = require("telescope.actions").cycle_history_prev,
-                        ["<C-l>"] = require("telescope.actions.layout").toggle_preview,
-                        ["<Tab>"] = require("telescope.actions").toggle_selection + require("telescope.actions").move_selection_next,
-                        ["<S-Tab>"] = require("telescope.actions").toggle_selection + require("telescope.actions").move_selection_previous,
-                    },
-                }
-
-            opts.extensions.undo.mappings = {
-                i = {
-                                ["<CR>"] = require("telescope-undo.actions").yank_additions,
-                                ["<S-CR>"] = require("telescope-undo.actions").yank_deletions,
-                                ["<C-CR>"] = require("telescope-undo.actions").restore,
-                            },
-            }
-
-            telescope.setup(opts)
-
-            local search_dotfiles = function()
-                telescope.extensions.file_browser.file_browser {
-                    prompt_title = "< VimRC >",
-                    cwd = "$HOME/.config/nvim/",
-                }
-            end
-
-            local switch_projects = function()
-                telescope.extensions.file_browser.file_browser {
-                    prompt_title = "< Switch Project >",
-                    cwd = "$HOME/Work/",
-                }
-            end
-
-            vim.keymap.set("n", "<leader>zz", search_dotfiles)
-
-            vim.keymap.set("n", "<leader>fb", "<Cmd>lua require('telescope.builtin').buffers()<CR>")
-            vim.keymap.set("n", "<leader>ff", "<Cmd>lua require('telescope.builtin').git_files()<CR>")
-            vim.keymap.set("n", "<leader>fg", "<Cmd>lua require('telescope.builtin').live_grep()<CR>")
-            vim.keymap.set("n", "<leader>fs", "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>")
-            vim.keymap.set("n", "<leader>fh", "<Cmd>lua require('telescope.builtin').help_tags()<CR>")
-            vim.keymap.set("n", "<leader>fv", "<Cmd>lua require('telescope').extensions.file_browser.file_browser()<CR>")
-            vim.keymap.set("n", "<leader>fr", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>")
-
-            vim.keymap.set("n", "<leader>ps", switch_projects)
-            vim.keymap.set("n", "<leader>pp", "<Cmd>lua require('telescope').extensions.project.project({change_dir= true})<CR>")
-
-        end,
+        keys = {
+            {
+                "<leader>zz",
+                function()
+                    require("telescope").extensions.file_browser.file_browser {
+                        prompt_title = "< VimRC >",
+                        cwd = "$HOME/.config/nvim/",
+                    }
+                end,
+                desc = "Search dotfiles",
+            },
+            {
+                "<leader>ps",
+                function()
+                    require("telescope").extensions.file_browser.file_browser {
+                        prompt_title = "< Switch Project >",
+                        cwd = "$HOME/Work/",
+                    }
+                end,
+                desc = "Switch projects",
+            },
+            { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+            {
+                "<leader>ff",
+                function()
+                    require("telescope.builtin").git_files()
+                end,
+                desc = "Find git files",
+            },
+            {
+                "<leader>fg",
+                function()
+                    require("telescope.builtin").live_grep()
+                end,
+                desc = "Search in project",
+            },
+            {
+                "<leader>fs",
+                function()
+                    require("telescope.builtin").current_buffer_fuzzy_find()
+                end,
+                desc = "Search in current buffer",
+            },
+            { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+            {
+                "<leader>fv",
+                function()
+                    require("telescope").extensions.file_browser.file_browser()
+                end,
+                desc = "File browser",
+            },
+            {
+                "<leader>fr",
+                function()
+                    require("telescope").extensions.frecency.frecency()
+                end,
+            },
+        },
     },
 
     -- git signs highlights text that has changed since the list
     -- git commit, and also lets you interactively stage & unstage
     -- hunks in a commit.
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
-      -- on_attach = function(buffer)
-      --   local gs = package.loaded.gitsigns
-      --
-      --   local function map(mode, l, r, desc)
-      --     vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-      --   end
-      --
-      --   -- stylua: ignore start
-      --   map("n", "]h", gs.next_hunk, "Next Hunk")
-      --   map("n", "[h", gs.prev_hunk, "Prev Hunk")
-      --   map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-      --   map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-      --   map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
-      --   map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-      --   map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-      --   map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
-      --   map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
-      --   map("n", "<leader>ghd", gs.diffthis, "Diff This")
-      --   map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
-      --   map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-      -- end,
+    {
+        "lewis6991/gitsigns.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            signs = {
+                add = { text = "▎" },
+                change = { text = "▎" },
+                delete = { text = "" },
+                topdelete = { text = "" },
+                changedelete = { text = "▎" },
+                untracked = { text = "▎" },
+            },
+            on_attach = function(buffer)
+                local gs = package.loaded.gitsigns
+
+                local function map(mode, l, r, desc)
+                    vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+                end
+
+              -- stylua: ignore start
+              -- map("n", "]h", gs.next_hunk, "Next Hunk")
+              -- map("n", "[h", gs.prev_hunk, "Prev Hunk")
+              -- map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+              -- map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+              -- map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+              -- map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+              -- map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+              -- map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
+              map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+                -- map("n", "<leader>ghd", gs.diffthis, "Diff This")
+                -- map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+                -- map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+            end,
+        },
     },
-  },
 
     -- better diagnostics list and others
-  {
-    "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    opts = {
-        use_diagnostic_signs = true,
-        mode = "workspace_diagnostics",
-    },
-    config = function(_, opts)
-        require("trouble").setup(opts)
-
-        vim.keymap.set("n", "<leader>gt", "<Cmd>TroubleToggle workspace_diagnostics<CR>")
-    end,
-  },
-
-  -- undotree
- --  {
- --   "mbbill/undotree",
- --   config = function(_, opts)
- --       require("undotree").setup(opts)
-
-   --     vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>")
-  --  end
- -- },
-
-  -- code outline window
-  {
-    'stevearc/aerial.nvim',
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    },
-    opts = {
-        layout = {
-            width = 40,
-            default_direction = "right",
-            placement = "edge",
+    {
+        "folke/trouble.nvim",
+        cmd = { "TroubleToggle", "Trouble" },
+        opts = {
+            use_diagnostic_signs = true,
+            mode = "workspace_diagnostics",
         },
-        on_attach = function(bufnr)
-            -- Jump forwards/backwards with '{' and '}'
-            vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', {buffer = bufnr})
-            vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', {buffer = bufnr})
-      end
-    },
-    config = function(_, opts)
-        require("aerial").setup(opts)
-
-        vim.keymap.set("n", "<leader>l", "<cmd>AerialToggle!<CR>")
-    end,
-  },
-
-  -- git integration
-  {
-    "tpope/vim-fugitive",
-    init = function()
-        vim.keymap.set("n", "<leader>gs", "<Cmd>Git<CR>")
-        vim.keymap.set("n", "<leader>gp", "<Cmd>Git push<CR>")
-        vim.keymap.set("n", "<leader>gb", "<Cmd>Git branch<CR>")
-        vim.keymap.set("n", "<leader>ge", "<Cmd>Git commit<CR>")
-        vim.keymap.set("n", "<leader>gx", "<Cmd>Gvdiffsplit<CR>")
-        vim.keymap.set("n", "<leader>gf", "<Cmd>Git fetch --all<CR>")
-        vim.keymap.set("n", "<leader>gx", "<Cmd>Gvdiffsplit<CR>")
-    end
-  },
-
-  -- git commit browser
-  { "junegunn/gv.vim" },
-
-  -- git diffview
-  {
-    "sindrets/diffview.nvim",
-    config = function(_, opts)
-        require("diffview").setup(opts)
-
-        vim.keymap.set("n", "<leader>gv", "<Cmd>DiffviewOpen<CR>")
-        vim.keymap.set("n", "<leader>gc", "<Cmd>DiffviewClose<CR>")
-    end
-
-  },
-
-  -- automatic indentation detection
-  { "tpope/vim-sleuth" },
-
-  -- movements across document
-  {
-    "phaazon/hop.nvim",
-    branch = "v2",
-    opts = {
-        keys = "etovxqpdygfblzhckisuran"
-    },
-    config = function(_, opts)
-        require("hop").setup(opts)
-
-        vim.keymap.set("n", "ff", "<Cmd>HopWordCurrentLine<CR>")
-        vim.keymap.set("n", "ft", "<Cmd>HopWord<CR>")
-    end
-  },
-
-  -- alternative to hop
-  {
-    "ggandor/leap.nvim",
-    opts = {
-        case_sensitive = true
-    },
-    config = function(_, opts)
-        require("leap").setup(opts)
-
-        vim.keymap.set({'n', 'x', 'o'}, 'r', '<Plug>(leap-forward-to)')
-        vim.keymap.set({'n', 'x', 'o'}, 'R', '<Plug>(leap-backward-to)')
-    end
-  },
-
-  -- improved f/F/t/T movements
-  { "ggandor/flit.nvim" },
-
-  -- dimming the highlights of unused functions, variables, parameters
-  {
-    "zbirenbaum/neodim",
-    event = "LspAttach",
-    branch = "v2",
-    opts = {
-      alpha = 0.6,
-      hide = {
-        virtual_text = false,
-        signs = true,
-        underline = false,
-      },
-    },
-    config = function (_, opts)
-      require("neodim").setup(opts)
-    end,
-  },
-
-  -- peek to a specific line
-  { "nacro90/numb.nvim" },
-
-  -- zen mode
-  {
-    "folke/zen-mode.nvim",
-    opts = {
-        window = { width = 0.5 },
-        kitty = { font = "+4" },
-        tmux = { enabled = false },
-        alacritty = {
-            enabled = true,
-            font = "28", -- font size
+        keys = {
+            { "<leader>gt", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble" },
         },
-    }
-  }
+    },
+
+    -- classic undotree
+    {
+        "mbbill/undotree",
+        init = function()
+            vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>")
+        end,
+    },
+
+    -- code outline window
+    {
+        "stevearc/aerial.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+        opts = {
+            layout = {
+                width = 40,
+                default_direction = "right",
+                placement = "edge",
+            },
+            on_attach = function(bufnr)
+                -- Jump forwards/backwards with '{' and '}'
+                vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+                vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+            end,
+        },
+        keys = {
+            { "<leader>l", "<cmd>AerialToggle!<CR>", desc = "Aerial" },
+        },
+    },
+
+    -- git integration
+    {
+        "tpope/vim-fugitive",
+        init = function()
+            vim.keymap.set("n", "<leader>gs", "<Cmd>Git<CR>")
+            vim.keymap.set("n", "<leader>gp", "<Cmd>Git push<CR>")
+            vim.keymap.set("n", "<leader>gb", "<Cmd>Git branch<CR>")
+            vim.keymap.set("n", "<leader>ge", "<Cmd>Git commit<CR>")
+            vim.keymap.set("n", "<leader>gx", "<Cmd>Gvdiffsplit<CR>")
+            vim.keymap.set("n", "<leader>gf", "<Cmd>Git fetch --all<CR>")
+            vim.keymap.set("n", "<leader>gx", "<Cmd>Gvdiffsplit<CR>")
+        end,
+    },
+
+    -- git commit browser
+    { "junegunn/gv.vim" },
+
+    -- git diffview
+    {
+        "sindrets/diffview.nvim",
+        keys = {
+            { "<leader>gv", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+            { "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+        },
+    },
+
+    -- automatic indentation detection
+    { "tpope/vim-sleuth" },
+
+    -- movements across document
+    {
+        "phaazon/hop.nvim",
+        branch = "v2",
+        opts = {
+            keys = "etovxqpdygfblzhckisuran",
+        },
+        keys = {
+            { "ff", "<Cmd>HopWordCurrentLine<CR>", desc = "Hop current line" },
+            { "ft", "<Cmd>HopWord<CR>", desc = "Hop whole buffer" },
+        },
+    },
+
+    -- alternative to hop
+    {
+        "ggandor/leap.nvim",
+        opts = {
+            case_sensitive = true,
+        },
+        keys = {
+            { "r", mode = { "n", "x", "o" }, "<Plug>(leap-forward-to)", desc = "Leap forward" },
+            { "R", mode = { "n", "x", "o" }, "<Plug>(leap-backward-to)", desc = "Leap backward" },
+        },
+    },
+
+    -- improved f/F/t/T movements
+    { "ggandor/flit.nvim" },
+
+    -- dimming the highlights of unused functions, variables, parameters
+    {
+        "zbirenbaum/neodim",
+        event = "LspAttach",
+        branch = "v2",
+        opts = {
+            alpha = 0.6,
+            hide = {
+                virtual_text = false,
+                signs = true,
+                underline = false,
+            },
+        },
+    },
+
+    -- peek to a specific line
+    { "nacro90/numb.nvim" },
+
+    -- zen mode
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            window = { width = 0.5 },
+            kitty = { font = "+4" },
+            tmux = { enabled = false },
+            alacritty = {
+                enabled = true,
+                font = "28", -- font size
+            },
+        },
+    },
+
+    {
+        "nvim-pack/nvim-spectre",
+        config = function(_, opts)
+            require("spectre").setup(opts)
+        end,
+        keys = {
+            { "<leader>S", "<cmd>lua require('spectre').toggle()<CR>", desc = "Toggle Spectre" },
+            {
+                "<leader>sw",
+                "<cmd>lua require('spectre').open_visual({select_word=true})<cr>",
+                desc = "Search current word",
+            },
+            {
+                "<leader>sw",
+                mode = { "v" },
+                "<esc><cmd>lua require('spectre').open_visual()<CR>",
+                desc = "Search current word",
+            },
+            {
+                "<leader>sp",
+                "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>",
+                desc = "Spectre file",
+            },
+        },
+    },
 }

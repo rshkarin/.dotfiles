@@ -12,11 +12,11 @@ return {
         "luisiacc/gruvbox-baby",
         lazy = false,
         priority = 1000,
-        init = function ()
+        init = function()
             vim.g.gruvbox_contrast_dark = "medium"
             vim.cmd [[colorscheme gruvbox-baby]]
             vim.cmd [[highlight Normal guibg=none]]
-        end
+        end,
     },
     -- {
     --     "folke/tokyonight.nvim",

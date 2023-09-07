@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.g.python3_host_prog = '~/.asdf/installs/python/3.9.0/bin/python'
+vim.g.python3_host_prog = "~/.asdf/installs/python/3.9.0/bin/python"
 
 local opt = vim.opt
 
@@ -10,7 +10,7 @@ opt.softtabstop = 4 -- Number of spaces tabs count for
 opt.shiftwidth = 4 -- Size of an indent
 opt.expandtab = true -- Use spaces instead of tabs
 opt.smartindent = true -- Insert indents automatically
-opt.guicursor = '' -- Configures the cursor style for each mode
+opt.guicursor = "" -- Configures the cursor style for each mode
 opt.hidden = true -- Keep hidden buffers
 opt.number = true -- Print line number
 opt.relativenumber = true -- Print relative line number
@@ -40,4 +40,3 @@ opt.timeoutlen = 300
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.winminwidth = 5 -- Minimum window width
 opt.wildignore = "*.pyc,*_build/*,**/coverage/*,**/node_modules/*,**/.git/*"
-

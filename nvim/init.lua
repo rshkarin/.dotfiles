@@ -1,3 +1,3 @@
-require('defaults')
-require('settings')
-require("plugins").setup()
+require("options")
+require("keymaps")
+require("plugins")

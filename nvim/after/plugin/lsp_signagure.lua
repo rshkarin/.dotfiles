@@ -1,12 +1,9 @@
-local ok, lsp_signature = pcall(require, "lsp_signature")
-if not ok then
-    return
-end
+require("lsp_signature").setup()
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local bufnr = args.buf
-        lsp_signature.on_attach({
+        require("lsp_signature").on_attach({
             bind = true,
             floating_window = false,
             hint_prefix = "",

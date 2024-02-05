@@ -1,0 +1,210 @@
+""" Map leader to space ---------------------
+let mapleader=" "
+
+""" Plugins  --------------------------------
+set surround
+set multiple-cursors
+set NERDTree
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set textobj-indent
+set ReplaceWithRegister
+
+""" Common settings -------------------------
+set scrolloff=5
+set history=1000
+set showmode
+set incsearch
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set smartindent
+set autoindent
+set hlsearch
+set ignorecase
+set smartcase
+set relativenumber
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" Mappings --------------------------------
+nnoremap <Leader>/ :nohlsearch<cr>
+nnoremap Y y$
+
+" Quick window navigation
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-L> <C-W>l
+map <C-H> <C-W>h
+
+" Shortcut for escape
+imap jj <Esc>
+imap jk <Esc>
+
+vnoremap <leader>p "_dP
+
+" Splitting Windows
+nmap <Leader>\ :vsplit<CR>
+nmap <Leader>v :vsplit<CR>
+nmap <Leader>- :split<CR>
+nmap <Leader>h :split<CR>
+
+" Hide open panels
+nmap <Leader>w <Action>(HideAllWindows)
+
+" Open recent project dialog box
+nmap <Leader>pp (ManageRecentProjects)
+
+map <leader>f <Plug>(easymotion-s)
+map <leader>e <Plug>(easymotion-f)
+
+" Mapping to mimic BufferExplorer
+" nmap <Leader>be <Action>(Switcher)
+nmap <Leader>fb <Action>(RecentFiles)
+nmap <Leader>ff <Action>(GotoFile)
+nmap <Leader>fg <Action>(SearchEverywhere)
+nmap <Leader><Leader>b <Action>(RecentFiles)
+
+" Nerdtree want to be
+" nmap <Leader>nt <Action> ActivateProjectToolWindow<CR>
+nmap <Leader>nt :NERDTreeToggle<CR>
+
+" Toggle code minimap
+nmap <Leader>m <Action>(CodeGlance.toggle)
+
+" Some Git Shortcuts for view status, pull, and branches
+" Mapping mimic Fugitive in my native vim
+nmap <Leader>gs <Action>(CheckinProject)
+nmap <Leader>gc <Action>(CheckinProject)
+nmap <Leader>ga <Action>(Git.Add)
+nmap <Leader>gp <Action>(Git.Pull)
+nmap <Leader>gn <Action>(Annotate)
+nmap <Leader>gl <Action>(Git.Log)
+nmap <Leader>go <Action>(Github.Open.In.Browser)
+nmap <Leader>br <Action>(Git.Branches)
+nmap <Leader>gb <Action>(Git.Branches)
+nmap <leader>gm <action>(Git.Menu)
+
+" Show erros
+nmap <leader>/ <Action>(ShowErrorDescription)
+nmap <leader>e <Action>(GotoNextError)
+
+" View my customize Quicklist
+nmap <Leader><leader>l <Action>(QuickList.MyList)
+
+" AceJump Plugin - Jump to Character
+nmap <Leader><Leader>w <Action>(AceAction)
+
+" Commenting
+nmap <Leader>cc <Action>(CommentByLineComment)
+nmap <Leader>cb <Action>(CommentByBlockComment)
+nmap <Leader>c<Space> <Action>(CommentByLineComment)
+nmap <Leader>cb<Space> <Action>(CommentByBlockComment)
+
+"Coding Formating
+" ===============
+nnoremap <leader>cf <Action>(ReformatCode)
+nnoremap <leader>pcf <Action>(Tool_External Tools_PHP CS Fixer)
+
+" Refactoring
+nmap <Leader>rt <Action>(Refactorings.QuickListPopupAction)
+"nmap csw' :action Macro.surround_with_single_quote<CR>
+
+" Move visual block
+vnoremap J :m '>+1<CR>
+" xnoremap K :m '<-2<CR>
+vnoremap K :m '<-2<CR>
+
+" Put search results in the middle of the screen
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Shortcut for copying to/from System Clipboard
+"" Copy (Yank)
+vmap <Leader>y "+y
+"" Cute
+vmap <Leader>d "+d
+"" Paste
+nmap <Leader>P "+p
+
+
+map Q gq
+
+map <leader>fg <Action>(FindInPath)
+
+""" Leader
+map <leader>da <Action>(ToggleLineBreakpoint)
+map <leader>dc <Action>(Resume)
+map <leader>dj <Action>(StepInto)
+map <leader>dk <Action>(StepOut)
+map <leader>dl <Action>(StepOver)
+
+map <C-r> <Action>(ChooseRunConfiguration)
+
+map <leader>rn <Action>(RenameElement)
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+
+map <leader>gr <Action>(ShowUsages)
+map <leader>hl <Action>(HighlightUsagesInFile)
+
+map <leader>qd <Action>(QuickDefinition)
+map <leader>qD <Action>(QuickTypeDefinition)
+
+map K <Action>(QuickJavaDoc)
+
+map <leader>fb <Action>(RecentFiles)
+map <leader>rl <Action>(RecentLocations)
+
+map <leader>l <Action>(FileStructurePopup)
+
+" map <leader>a <Action>(GotoAction)
+
+" map <leader>uw <Action>(Unwrap)
+
+map <leader>= <Action>(ReformatCode)
+
+map cc <Action>(CommentByLineComment)
+
+map <C-z> <Action>(ToggleDistractionFreeMode)
+
+map <C-t> <Action>(ActivateTerminalToolWindow)
+map <leader>t <Action>(Terminal.OpenInTerminal)
+
+map <TAB> <Action>(PreviousTab)
+map <s-TAB> <Action>(NextTab)
+
+map <leader>ff <Action>(GotoFile)
+
+map <leader>ggb <Action>(Git.Branches)
+map <leader>ggh <Action>(Vcs.Show.Log)
+map <leader>gs <Action>(CheckinProject)
+
+map X <Action>(ChangesView.Revert)
+map <S-q> <Action>(HideActiveWindow)
+
+map <CR> <Action>(EditorChooseLookupItem)
+map <Tab> <Action>(EditorDown)
+map <S-Tab> <Action>(EditorUp)
+
+""" Shift+Enter - right split
+
+map ga <Action>(GotoAction)
+map gm <Action>(GotoSuperMethod)
+" map gc <Action>(GotoClass)
+" map gt <Action>(GotoTest)
+map gd <Action>(GotoDeclaration)
+map gD <Action>(GotoTypeDeclaration)
+map gi <Action>(GotoImplementation)
+map gI <Action>(QuickImplementations)
+map gs <Action>(GotoSymbol)
+
+

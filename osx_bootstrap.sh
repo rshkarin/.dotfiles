@@ -49,8 +49,8 @@ PACKAGES=(
 	ansible
 	awscli
     bat
-	# bash-completion
-	# bash-git-prompt
+	bash-completion
+	bash-git-prompt
     coreutils
 	cookiecutter
 	curl
@@ -74,7 +74,6 @@ PACKAGES=(
     kubectl	
     lazygit
     lua
-    luajit
     luarocks
     nomad
     neovim
@@ -112,62 +111,24 @@ echo_ok "Installing cask..."
 brew tap caskroom/cask
 
 CASKS=(
-	adobe-acrobat-reader
-	alfred
-	appcleaner
-	appzapper
-	atom
-	cakebrew
-	calibre
-	colloquy
-	cyberduck
-	daisydisk
-	deluge
-	docker
-	dropbox
-	evernote
-	firefox
-	flycut
-	github
-	gitter
+    1password
+    alacritty
+    adobe-creative-cloud
+    discord
+    orbstack	
 	google-chrome
+    google-drive
 	google-cloud-sdk
-	google-hangouts
-	handbrake
-	iterm2
-	keka
-	keybase
-	kindle
-	lingon-x
-	liya
-	macvim
-	microsoft-azure-storage-explorer
-	microsoft-remote-desktop-beta
-	mysqlworkbench
-	textmate
-	microsoft-teams
-	mpv
-	qbittorrent
-	qlstephen
-	sequel-pro
-	skitch
+    notion
+    telegram
+    tailscale
 	skype
 	slack
-	sourcetree
 	spotify
-	spotify-notifications
-	sublime-text
-	teamviewer
-	torbrowser
-	transmission
-	vagrant
-	virtualbox
-	virtualbox
+    intellij-idea
 	visual-studio-code
 	vlc
-	vlc
-	whatsapp
-	xact
+    zoom
 )
 
 echo_ok "Installing cask apps..."

@@ -77,6 +77,7 @@ PACKAGES=(
     luarocks
     nomad
     neovim
+    starship
 	pipenv
 	python3
 	pyenv

@@ -200,31 +200,47 @@ FISH_PLUGINS=(
 )
 fisher install "${FISH_PLUGINS[@]}" 
 
-echo_ok "Configuring Github"
-if [[ ! -f ~/.ssh/id_rsa ]]; then
-	echo ''
-	echo '##### Please enter your git username: '
-	read git_user
-	echo '##### Please enter your git email address: '
-	read git_email
+echo_ok "Configuring git..."
+echo '## Please enter your full name:'
+read -r git_fullname
+echo '## Please enter your git email address: '
+read -r git_email
+cat << EOF > ~/Downloads/gitconfig_test
+[user]
+    name = $git_fullname
+    email = $git_email
+    signingKey = $(op read "op://Private/SSH Key Machine/public key") $git_email 
 
-	# setup github
-	if [[ $git_user && $git_email ]]; then
-		# setup config
-		git config --global user.name "$git_user"
-		git config --global user.email "$git_email"
-	fi
-fi
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 
-# Set fast key repeat rate
-# The step values that correspond to the sliders on the GUI are as follow (lower equals faster):
-# KeyRepeat: 120, 90, 60, 30, 12, 6, 2
-# InitialKeyRepeat: 120, 94, 68, 35, 25, 15
-# defaults write NSGlobalDomain KeyRepeat -int 6
-# defaults write NSGlobalDomain InitialKeyRepeat -int 25
+[alias]
+    co = checkout
+    br = branch
 
-# Always show scrollbars
-# defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+[pull]
+    rebase = true
+
+[push]
+    default = current
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgsign = true
+
+[gpg "ssh"]
+    allowedSignersFile = ~/.config/git/allowed_signers
+
+[init]
+    defaultBranch = master
+EOF
+
+echo "Git configuration file created at ~/.gitconfig"
 
 echo_ok 'Running OSX Software Updates...'
 sudo softwareupdate -i -a

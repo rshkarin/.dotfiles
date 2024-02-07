@@ -157,8 +157,8 @@ done
 echo_ok "Installing fish shell plugin manager..."
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
-echo_ok "Installing development environtment..."
-git clone https://github.com/rshkarin/.dotfiles.git ~/.dotfiles
+echo_ok "Installing development environtment neovim, alacritty, fish, tmux..."
+git clone https://github.com/rshkarin/.dotfiles.git "$HOME/.dotfiles" 
 
 config_dir="$HOME/.config"
 if [ ! -d "$config_dir" ]; then
@@ -184,6 +184,9 @@ create_symlink() {
 create_symlink "$HOME/.dotfiles/nvim" "$config_dir/nvim"
 create_symlink "$HOME/.dotfiles/alacritty" "$config_dir/alacritty"
 create_symlink "$HOME/.dotfiles/fish" "$config_dir/fish"
+create_symlink "$HOME/.dotfiles/scripts" "$config_dir/scripts"
+create_symlink "$HOME/.dotfiles/starship.toml" "$config_dir/starship.toml"
+create_symlink "$HOME/.dotfiles/tmux.conf" "$HOME/tmux.conf"
 
 echo_ok "Installing fish shell plugins..."
 FISH_PLUGINS=(

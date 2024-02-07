@@ -87,6 +87,7 @@ PACKAGES=(
 	terraform
 	thefuck
 	tree
+    terminal-notifier
     tldr
     tmux
     virtualenv
@@ -132,196 +133,100 @@ CASKS=(
 )
 
 echo_ok "Installing cask apps..."
-brew cask install "${CASKS[@]}"
-
-# brew cask quicklook
-echo_ok "Installing QuickLook Plugins..."
-brew cask install \
-	qlcolorcode qlmarkdown qlprettypatch qlstephen \
-	qlimagesize \
-	quicklook-csv quicklook-json epubquicklook
+brew install --cask "${CASKS[@]}"
 
 echo_ok "Installing fonts..."
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 FONTS=(
-	font-clear-sans
-	font-consolas-for-powerline
-	font-dejavu-sans-mono-for-powerline
-	font-fira-code
-	font-fira-mono-for-powerline
-	font-inconsolata
-	font-inconsolata-for-powerline
-	font-liberation-mono-for-powerline
-	font-menlo-for-powerline
-	font-roboto
+    font-fira-code-nerd-font
+    font-jetbrains-mono-nerd-font
 )
 brew cask install "${FONTS[@]}"
 
-echo_ok "Installing Python packages..."
-PYTHON_PACKAGES=(
-	ipython
-	virtualenv
-	virtualenvwrapper
+echo_ok "Installing asdf plugins..."
+ASDF_PLUGINS=(
+	python
+	go
+	ruby
+    rust
 )
-sudo pip install "${PYTHON_PACKAGES[@]}"
+for i in "${ASDF_PLUGINS[@]}"; do
+	asdf plugin add "$i"
+done
 
-echo "Installing Ruby gems"
-RUBY_GEMS=(
-	bundler
-	rake
-)
-sudo gem install "${RUBY_GEMS[@]}"
+echo_ok "Installing fish shell plugin manager..."
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
-echo_ok "Installing global npm packages..."
+echo_ok "Installing development environtment..."
+git clone https://github.com/rshkarin/.dotfiles.git ~/.dotfiles
 
-npm install -g aws-sam-local
-npm install -g spaceship-prompt
-
-echo_ok "Installing oh my zsh..."
-
-if [[ ! -f ~/.zshrc ]]; then
-	echo ''
-	echo '##### Installing oh-my-zsh...'
-	curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-
-	cp ~/.zshrc ~/.zshrc.orig
-	cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-	chsh -s /bin/zsh
+config_dir="$HOME/.config"
+if [ ! -d "$config_dir" ]; then
+    echo_ok "Creating ~/.config directory..."
+    mkdir -p "$config_dir"
 fi
+
+# Function to create symlink and backup existing folder if necessary
+create_symlink() {
+    local target="$1"
+    local link_name="$2"
+
+    if [ -e "$link_name" ]; then
+        echo_warn "Backup existing $link_name to $link_name.bkp"
+        mv "$link_name" "$link_name.bkp"
+    fi
+
+    echo_ok "Creating symlink $link_name -> $target"
+    ln -s "$target" "$link_name"
+}
+
+# Create symlinks for nvim, alacritty, and fish
+create_symlink "$HOME/.dotfiles/nvim" "$config_dir/nvim"
+create_symlink "$HOME/.dotfiles/alacritty" "$config_dir/alacritty"
+create_symlink "$HOME/.dotfiles/fish" "$config_dir/fish"
+
+echo_ok "Installing fish shell plugins..."
+FISH_PLUGINS=(
+    jorgebucaran/fisher
+    PatrickF1/fzf.fish
+    jomik/fish-gruvbox
+    h-matsuo/fish-color-scheme-switcher
+    danhper/fish-ssh-agent
+    meaningful-ooo/sponge
+    franciscolourenco/done
+)
+fisher install "${FISH_PLUGINS[@]}" 
 
 echo_ok "Configuring Github"
-
 if [[ ! -f ~/.ssh/id_rsa ]]; then
 	echo ''
-	echo '##### Please enter your github username: '
-	read github_user
-	echo '##### Please enter your github email address: '
-	read github_email
+	echo '##### Please enter your git username: '
+	read git_user
+	echo '##### Please enter your git email address: '
+	read git_email
 
 	# setup github
-	if [[ $github_user && $github_email ]]; then
+	if [[ $git_user && $git_email ]]; then
 		# setup config
-		git config --global user.name "$github_user"
-		git config --global user.email "$github_email"
-		git config --global github.user "$github_user"
-		# git config --global github.token your_token_here
-		git config --global color.ui true
-		git config --global push.default current
-		# VS Code support
-		git config --global core.editor "code --wait"
-
-		# set rsa key
-		curl -s -O http://github-media-downloads.s3.amazonaws.com/osx/git-credential-osxkeychain
-		chmod u+x git-credential-osxkeychain
-		sudo mv git-credential-osxkeychain "$(dirname $(which git))/git-credential-osxkeychain"
-		git config --global credential.helper osxkeychain
-
-		# generate ssh key
-		cd ~/.ssh || exit
-		ssh-keygen -t rsa -C "$github_email"
-		pbcopy <~/.ssh/id_rsa.pub
-		echo ''
-		echo '##### The following rsa key has been copied to your clipboard: '
-		cat ~/.ssh/id_rsa.pub
-		echo '##### Follow step 4 to complete: https://help.github.com/articles/generating-ssh-keys'
-		ssh -T git@github.com
+		git config --global user.name "$git_user"
+		git config --global user.email "$git_email"
 	fi
 fi
-
-echo_ok "Installing VS Code Extensions..."
-
-VSCODE_EXTENSIONS=(
-	AlanWalk.markdown-toc
-	CoenraadS.bracket-pair-colorizer
-	DavidAnson.vscode-markdownlint
-	DotJoshJohnson.xml
-	EditorConfig.EditorConfig
-	Equinusocio.vsc-material-theme
-	HookyQR.beautify
-	James-Yu.latex-workshop
-	PKief.material-icon-theme
-	PeterJausovec.vscode-docker
-	Shan.code-settings-sync
-	Zignd.html-css-class-completion
-	akamud.vscode-theme-onedark
-	akmittal.hugofy
-	anseki.vscode-color
-	arcticicestudio.nord-visual-studio-code
-	aws-scripting-guy.cform
-	bungcip.better-toml
-	christian-kohler.npm-intellisense
-	christian-kohler.path-intellisense
-	codezombiech.gitignore
-	dansilver.typewriter
-	dbaeumer.jshint
-	donjayamanne.githistory
-	dracula-theme.theme-dracula
-	eamodio.gitlens
-	eg2.vscode-npm-script
-	ipedrazas.kubernetes-snippets
-	loganarnett.lambda-snippets
-	lukehoban.Go
-	mohsen1.prettify-json
-	monokai.theme-monokai-pro-vscode
-	ms-python.python
-	ms-vscode.azure-account
-	msjsdiag.debugger-for-chrome
-	robertohuertasm.vscode-icons
-	robinbentley.sass-indented
-	waderyan.gitblame
-	whizkydee.material-palenight-theme
-	whtsky.agila-theme
-	zhuangtongfa.Material-theme
-	foxundermoon.shell-format
-	timonwong.shellcheck
-)
-
-if hash code &>/dev/null; then
-	echo_ok "Installing VS Code extensions..."
-	for i in "${VSCODE_EXTENSIONS[@]}"; do
-		code --install-extension "$i"
-	done
-fi
-
-echo_ok "Configuring OSX..."
 
 # Set fast key repeat rate
 # The step values that correspond to the sliders on the GUI are as follow (lower equals faster):
 # KeyRepeat: 120, 90, 60, 30, 12, 6, 2
 # InitialKeyRepeat: 120, 94, 68, 35, 25, 15
-defaults write NSGlobalDomain KeyRepeat -int 6
-defaults write NSGlobalDomain InitialKeyRepeat -int 25
+# defaults write NSGlobalDomain KeyRepeat -int 6
+# defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 # Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
-
-# Require password as soon as screensaver or sleep mode starts
-# defaults write com.apple.screensaver askForPassword -int 1
-# defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-# Show filename extensions by default
-# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# Expanded Save menu
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-
-# Expanded Print menu
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
-
-# Enable tap-to-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
-# Disable "natural" scroll
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+# defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 echo_ok 'Running OSX Software Updates...'
 sudo softwareupdate -i -a
 
 echo_ok "Creating folder structure..."
-#[[ ! -d Wiki ]] && mkdir Wiki
-#[[ ! -d Workspace ]] && mkdir Workspace
+[[ ! -d ~/Work ]] && mkdir ~/Work 
 
 echo_ok "Bootstrapping complete"

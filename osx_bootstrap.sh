@@ -156,6 +156,17 @@ for i in "${ASDF_PLUGINS[@]}"; do
 	asdf plugin add "$i"
 done
 
+echo_ok "Installing and settin global ruby, golang, python and rust..."
+asdf install ruby 3.0.6
+asdf install golang 1.20.14
+asdf install python 3.10.12
+asdf install rust 1.74.1
+
+asdf global ruby 3.0.6
+asdf global golang 1.20.14
+asdf global python 3.10.12
+asdf global rust 1.74.1
+
 echo_ok "Installing fish shell plugin manager..."
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 

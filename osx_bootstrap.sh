@@ -171,7 +171,7 @@ echo_ok "Installing fish shell plugin manager..."
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
 echo_ok "Installing development environtment neovim, alacritty, fish, tmux..."
-git clone https://github.com/rshkarin/.dotfiles.git "$HOME/.dotfiles" 
+git clone -b thin-packer-config https://github.com/rshkarin/.dotfiles.git "$HOME/.dotfiles" 
 
 config_dir="$HOME/.config"
 if [ ! -d "$config_dir" ]; then

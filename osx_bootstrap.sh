@@ -198,6 +198,7 @@ FISH_PLUGINS=(
     danhper/fish-ssh-agent
     meaningful-ooo/sponge
     franciscolourenco/done
+    rstacruz/fish-asdf
 )
 fisher install "${FISH_PLUGINS[@]}" 
 
@@ -240,8 +241,22 @@ cat << EOF > ~/Downloads/gitconfig_test
 [init]
     defaultBranch = master
 EOF
-
 echo "Git configuration file created at ~/.gitconfig"
+
+echo_ok "Configuring SSH..."
+cat << EOF > "$HOME/.ssh/config"
+Include ~/.orbstack/ssh/config
+
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+EOF
+
+cat << EOF > "$HOME/.ssh/id_rsa.pub"
+$(op read "op://Private/SSH Key Machine/public key") $git_email
+EOF
+op read "op://Private/SSH Key Machine/private key?ssh-format=openssh" > "$HOME/.ssh/id_rsa" 
 
 echo_ok 'Running OSX Software Updates...'
 sudo softwareupdate -i -a

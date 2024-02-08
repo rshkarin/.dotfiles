@@ -189,6 +189,7 @@ create_symlink "$HOME/.dotfiles/fish" "$config_dir/fish"
 create_symlink "$HOME/.dotfiles/scripts" "$config_dir/scripts"
 create_symlink "$HOME/.dotfiles/starship.toml" "$config_dir/starship.toml"
 create_symlink "$HOME/.dotfiles/tmux.conf" "$HOME/tmux.conf"
+create_symlink "$HOME/.dotfiles/.ideavimrc" "$HOME/.ideavimrc"
 
 echo_ok "Configuring python keyring..."
 cat << EOF > "$HOME/.config/python_keyring/keyringrc.cfg"

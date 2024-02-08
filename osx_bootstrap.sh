@@ -72,6 +72,7 @@ PACKAGES=(
     ripgrep
 	jq
     kubectl	
+    keyring
     lazygit
     lua
     luarocks
@@ -189,6 +190,12 @@ create_symlink "$HOME/.dotfiles/scripts" "$config_dir/scripts"
 create_symlink "$HOME/.dotfiles/starship.toml" "$config_dir/starship.toml"
 create_symlink "$HOME/.dotfiles/tmux.conf" "$HOME/tmux.conf"
 
+echo_ok "Configuring python keyring..."
+cat << EOF > "$HOME/.config/python_keyring/keyringrc.cfg"
+[backend]
+default-keyring=keyring.backends.macOS.Keyring
+EOF
+
 echo_ok "Installing fish shell plugins..."
 FISH_PLUGINS=(
     jorgebucaran/fisher
@@ -207,7 +214,7 @@ echo '## Please enter your full name:'
 read -r git_fullname
 echo '## Please enter your git email address: '
 read -r git_email
-cat << EOF > ~/Downloads/gitconfig_test
+cat << EOF > "$HOME/.gitconfig"
 [user]
     name = $git_fullname
     email = $git_email

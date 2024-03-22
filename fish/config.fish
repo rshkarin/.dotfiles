@@ -10,3 +10,4 @@ source $HOME/.config/fish/aliases.fish
 set PATH $PATH /Users/roman/.local/bin
 set PATH $PATH /Users/roman/.cargo/bin
 set PATH $PATH /Users/roman/.config/scripts
+set PKG_CONFIG_PATH $PKG_CONFIG_PATH $(brew --prefix)/lib/pkgconfig

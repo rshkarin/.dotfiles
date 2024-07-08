@@ -113,7 +113,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [shell]
 args = ["new-session", "-A", "-D", "-s", "tmux"]
-program = "/usr/local/bin/tmux"
+program = "/opt/homebrew/bin/tmux"
 
 [window]
 decorations = "full"

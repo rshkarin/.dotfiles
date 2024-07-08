@@ -1,0 +1,130 @@
+import = ["~/.config/alacritty/rose-pine-moon.toml"]
+live_config_reload = true
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+style = "Block"
+unfocused_hollow = false
+
+[debug]
+render_timer = false
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 14
+
+[font.bold]
+family = "FiraCode Nerd Font"
+style = "Medium"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "Menlo"
+style = "Italic"
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+chars = "\u001B1"
+key = "Key1"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B2"
+key = "Key2"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B3"
+key = "Key3"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B4"
+key = "Key4"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B5"
+key = "Key5"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B6"
+key = "Key6"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B7"
+key = "Key7"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B8"
+key = "Key8"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B9"
+key = "Key9"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[32;2u"
+key = "Space"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[13;2u"
+key = "Return"
+mods = "Shift"
+
+[mouse]
+hide_when_typing = true
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+
+[shell]
+args = ["new-session", "-A", "-D", "-s", "tmux"]
+program = "/opt/homebrew/bin/tmux"
+
+[window]
+decorations = "full"
+dynamic_padding = false
+dynamic_title = true
+option_as_alt = "Both"
+
+[window.dimensions]
+columns = 160
+lines = 48
+
+[window.padding]
+x = 0
+y = 0

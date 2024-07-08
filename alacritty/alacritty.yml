@@ -1,6 +1,7 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 import:
   - "/Users/roman/.config/alacritty/color.yml"
+  # - "~/.config/alacritty/rose-pine-moon.toml"
 
 env:
   TERM: xterm-256color
@@ -28,6 +29,8 @@ window:
   # Setting this to false will result in window without borders and title bar.
   decorations: full
 
+  option_as_alt: Both
+
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
@@ -43,14 +46,24 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   # The normal (roman) font face to use.
+
+  # normal:
+  #   family: JetBrains Mono
+  #   style: Regular
+  # normal:
+    # family: Hack Nerd Font
+    # style: Regular
+  # normal:
+  #   family: JetBrains Mono
+  #   style: Regular
   normal:
     family: FiraCode Nerd Font
-    style: Light
+    style: Regular
 
   # The bold font face
   bold:
     family: FiraCode Nerd Font
-    style: Bold
+    style: Medium
 
   # The italic font face
   italic:
@@ -73,11 +86,6 @@ font:
     x: 0
     y: 0
 
-  # OS X only: use thin stroke font rendering. Thin strokes are suitable
-  # for retina displays, but for non-retina you probably want this set to
-  # false.
-  use_thin_strokes: true
-
 debug:
   # Should display the render timer
   render_timer: false
@@ -85,8 +93,6 @@ debug:
 bell:
   animation: EaseOutExpo
   duration: 0
-
-window.opacity: 1.0
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
@@ -147,3 +153,16 @@ shell:
     - -D
     - -s
     - main
+
+key_bindings:
+  - { key: Key1,      mods: Control,       chars: "\x1b1"                       }
+  - { key: Key2,      mods: Control,       chars: "\x1b2"                       }
+  - { key: Key3,      mods: Control,       chars: "\x1b3"                       }
+  - { key: Key4,      mods: Control,       chars: "\x1b4"                       }
+  - { key: Key5,      mods: Control,       chars: "\x1b5"                       }
+  - { key: Key6,      mods: Control,       chars: "\x1b6"                       }
+  - { key: Key7,      mods: Control,       chars: "\x1b7"                       }
+  - { key: Key8,      mods: Control,       chars: "\x1b8"                       }
+  - { key: Key9,      mods: Control,       chars: "\x1b9"                       }
+  - { key: Space,     mods: Shift,         chars: "\x1b[32;2u"                  }
+  - { key: Return,    mods: Shift,         chars: "\x1b[13;2u"                  }

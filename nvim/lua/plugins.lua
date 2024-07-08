@@ -34,9 +34,10 @@ return require("packer").startup(function(use)
 
     use({
         "folke/trouble.nvim",
+        requires = { { "nvim-tree/nvim-web-devicons" } },
         config = function()
             require("trouble").setup({
-                icons = false,
+                -- icons = false,
             })
         end,
     })
@@ -173,7 +174,7 @@ return require("packer").startup(function(use)
 
     use("stevearc/conform.nvim")
 
-    use("/Users/roman/Work/mason-nvim-lint")
+    use("rshkarin/mason-nvim-lint")
 
     use({
         "stevearc/oil.nvim",

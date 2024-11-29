@@ -12,6 +12,7 @@ return {
                 typescript = { 'eslint_d' },
                 golang = { 'revive' },
                 python = { 'flake8' },
+                html = {'htmlhint'},
             }
         end
 
@@ -32,5 +33,11 @@ return {
         end
     },
 
-    "rshkarin/mason-nvim-lint",
+    {
+        dir = "~/Work/mason-nvim-lint",
+        dev = true,
+        config = function()
+            require("mason-nvim-lint").setup()
+        end
+    },
 }

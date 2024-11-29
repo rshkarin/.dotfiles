@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.g.python3_host_prog = '~/.asdf/installs/python/3.9.0/bin/python'
+vim.g.python3_host_prog = '~/.asdf/shims/python'
 
 local opt = vim.opt
 
@@ -44,3 +44,7 @@ opt.timeoutlen = 300
 opt.updatetime = 50 -- Save swap file and trigger CursorHold
 opt.winminwidth = 5 -- Minimum window width
 opt.wildignore = "*.pyc,*_build/*,**/coverage/*,**/node_modules/*,**/.git/*"
+
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25

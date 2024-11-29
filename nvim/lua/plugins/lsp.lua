@@ -1,24 +1,3 @@
-function on_attach(opts)
-    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set('n', '<leader>gd', function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set('n', '<leader>gD', function() vim.lsp.buf.declaration() end, opts)
-    vim.keymap.set('n', '<leader>gi', function() vim.lsp.buf.implementation() end, opts)
-    vim.keymap.set('n', '<leader>gT', function() vim.lsp.buf.type_definition() end, opts)
-    vim.keymap.set('n', '<leader>gr', function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set('n', '<leader>gk', function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set('n', '<leader>gl', function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set('n', '<leader>gc', function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set('n', '<leader>gwl', function() vim.lsp.buf.workspace_symbol() end, opts)
-
-    vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set('n', '<leader>fn',
-        function() require("conform").format({ async = true, lsp_fallback = true }) end,
-        opts)
-
-    vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
-end
-
 return {
     {
         "williamboman/mason-lspconfig.nvim",
@@ -32,7 +11,6 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/nvim-cmp",
-            "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
 
             "j-hui/fidget.nvim",
@@ -106,26 +84,35 @@ return {
                 })
             })
 
-            cmp.setup.cmdline({ '/', '?' }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = 'buffer' }
-                }
-            })
 
-            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline(':', {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = 'path' }
-                }, {
-                    { name = 'cmdline' }
-                }),
-                matching = { disallow_symbol_nonprefix_matching = false }
-            })
+            -- cmp.setup.cmdline({ '/', '?' }, {
+            --     mapping = cmp.mapping.preset.cmdline(),
+            --     sources = {
+            --         { name = 'buffer' }
+            --     }
+            -- })
+            --
+            -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+            -- cmp.setup.cmdline(':', {
+            --     mapping = cmp.mapping.preset.cmdline(),
+            --     sources = cmp.config.sources({
+            --         { name = 'path' }
+            --     }, {
+            --         { name = 'cmdline' }
+            --     }),
+            --     matching = { disallow_symbol_nonprefix_matching = false }
+            -- })
 
             vim.diagnostic.config({
-                virtual_text = true
+                update_on_insert = true,
+                float = {
+                    focusable = false,
+                    style = "minimal",
+                    border = "rounded",
+                    source = "always",
+                    header = "",
+                    prefix = "",
+                },
             })
         end
     },

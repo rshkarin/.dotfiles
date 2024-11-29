@@ -11,18 +11,12 @@ return {
     },
 
     {
-        "nvim-lua/plenary.nvim",
-        name = "plenary"
-    },
+        "numToStr/Comment.nvim",
 
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "plenary"
-        }
+        config = function()
+            require("Comment").setup()
+        end
     },
-
-    "numToStr/Comment.nvim",
 
     {
         "lewis6991/gitsigns.nvim",

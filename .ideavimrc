@@ -75,37 +75,47 @@ nmap <Leader><Leader>b <Action>(RecentFiles)
 " nmap <Leader>nt <Action> ActivateProjectToolWindow<CR>
 nmap <Leader>nt :NERDTreeToggle<CR>
 
+" Traverse search result
+nnoremap <C-j> <Action> FindNext<CR>
+nnoremap <C-k> <Action> FindPrevious<CR>
+
+" Tools panel
+nnoremap <C-q> :action HideAllToolWindows<CR>
+
 " Toggle code minimap
 nmap <Leader>m <Action>(CodeGlance.toggle)
 
 " Some Git Shortcuts for view status, pull, and branches
 " Mapping mimic Fugitive in my native vim
-nmap <Leader>gs <Action>(CheckinProject)
-nmap <Leader>gc <Action>(CheckinProject)
+nmap <Leader>gs <Action> CheckinProject<CR>
+" nmap <Leader>gc <Action>(CheckinProject)
 nmap <Leader>ga <Action>(Git.Add)
-nmap <Leader>gp <Action>(Git.Pull)
+nmap <Leader>gp <Action>(Git.Push)
 nmap <Leader>gn <Action>(Annotate)
 nmap <Leader>gl <Action>(Git.Log)
 nmap <Leader>go <Action>(Github.Open.In.Browser)
 nmap <Leader>br <Action>(Git.Branches)
 nmap <Leader>gb <Action>(Git.Branches)
 nmap <leader>gm <action>(Git.Menu)
+nmap <Leader>ge :action Vcs.CommitAndPushExecutor<CR>
+nmap <Leader>gw <Action>(Vcs.Show.Local.Changes)
+nmap <Leader>
 
 " Show erros
 nmap <leader>/ <Action>(ShowErrorDescription)
 nmap <leader>e <Action>(GotoNextError)
 
 " View my customize Quicklist
-nmap <Leader><leader>l <Action>(QuickList.MyList)
+nmap <Leader><Leader>l <Action>(QuickList.MyList)
 
 " AceJump Plugin - Jump to Character
 nmap <Leader><Leader>w <Action>(AceAction)
 
 " Commenting
-nmap <Leader>cc <Action>(CommentByLineComment)
-nmap <Leader>cb <Action>(CommentByBlockComment)
-nmap <Leader>c<Space> <Action>(CommentByLineComment)
-nmap <Leader>cb<Space> <Action>(CommentByBlockComment)
+nmap <Leader>gc <Action>(CommentByLineComment)
+nmap <Leader>gcc <Action>(CommentByBlockComment)
+" nmap <Leader>c<Space> <Action>(CommentByLineComment)
+" nmap <Leader>cb<Space> <Action>(CommentByBlockComment)
 
 "Coding Formating
 " ===============
@@ -192,8 +202,9 @@ map X <Action>(ChangesView.Revert)
 map <S-q> <Action>(HideActiveWindow)
 
 map <CR> <Action>(EditorChooseLookupItem)
-map <Tab> <Action>(EditorDown)
-map <S-Tab> <Action>(EditorUp)
+" map <Tab> <Action>(EditorDown)
+" map <S-Tab> <Action>(EditorUp)
+"
 
 """ Shift+Enter - right split
 

@@ -7,6 +7,7 @@ local opt = vim.opt
 
 opt.tabstop = 4           -- Number of spaces tabs count for
 opt.softtabstop = 4       -- Number of spaces tabs count for
+opt.laststatus = 3
 opt.hidden = true         -- Keep hidden buffers
 opt.shiftwidth = 4        -- Size of an indent
 opt.expandtab = true      -- Use spaces instead of tabs

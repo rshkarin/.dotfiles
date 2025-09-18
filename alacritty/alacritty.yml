@@ -1,6 +1,6 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 import:
-  - "/Users/roman/.config/alacritty/color.yml"
+  - "~/.config/alacritty/color.yml"
   # - "~/.config/alacritty/rose-pine-moon.toml"
 
 env:

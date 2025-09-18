@@ -34,8 +34,7 @@ return {
     },
 
     {
-        dir = "~/Work/mason-nvim-lint",
-        dev = true,
+        "https://github.com/rshkarin/mason-nvim-lint",
         config = function()
             require("mason-nvim-lint").setup()
         end
